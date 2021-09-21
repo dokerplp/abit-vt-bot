@@ -26,7 +26,8 @@ public class StartCommand implements Command{
     public void execute(Update update) throws TelegramApiException {
         Message message = update.getMessage();
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(message.getChatId().toString());
+        if (message != null) sendMessage.setChatId(message.getChatId().toString());
+        else sendMessage.setChatId(update.getCallbackQuery().getMessage().getChatId().toString());
         sendMessage.setText("Welcome to the club buddy!");
 
 

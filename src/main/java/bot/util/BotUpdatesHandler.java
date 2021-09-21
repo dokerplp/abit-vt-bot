@@ -27,8 +27,18 @@ public class BotUpdatesHandler implements UpdatesHandler {
             if (text.startsWith("/")) bot.invoke(text, update);
 
         } else if(update.hasCallbackQuery()){
+
             String text = update.getCallbackQuery().getData();
             if (text.startsWith("/")) bot.invoke(text, update);
+
+//            try {
+//                SendMessage sendMessage = new SendMessage();
+//                sendMessage.setText(update.getCallbackQuery().getData());
+//                sendMessage.setChatId(update.getCallbackQuery().getMessage().getChatId().toString());
+//                bot.execute(sendMessage);
+//            } catch (TelegramApiException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 }
