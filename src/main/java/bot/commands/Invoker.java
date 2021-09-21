@@ -10,14 +10,17 @@ import java.util.Map;
 
 public class Invoker {
     private final AbitVTBot bot;
+    private final Map<String, Command> commandMap = new HashMap<>();
 
     public Invoker(AbitVTBot bot) {
         this.bot = bot;
     }
 
-    private final Map<String, Command> commandMap = new HashMap<>();
+    public Map<String, Command> getCommandMap() {
+        return commandMap;
+    }
 
-    public void add(String key, Command command){
+    public void add(String key, Command command) {
         commandMap.put(key, command);
     }
 

@@ -27,7 +27,7 @@ public class StartCommand implements Command{
         Message message = update.getMessage();
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(message.getChatId().toString());
-        sendMessage.setText("Hello");
+        sendMessage.setText("Welcome to the club buddy!");
 
 
         Sticker sticker = new Sticker();
@@ -37,8 +37,12 @@ public class StartCommand implements Command{
         sendSticker.setChatId(message.getChatId().toString());
         sendSticker.setSticker(new InputFile().setMedia(Stickers.WELCOME_TO_THE_CLUB.toString()));
 
-
-        bot.execute(sendMessage);
         bot.execute(sendSticker);
+        bot.execute(sendMessage);
+    }
+
+    @Override
+    public String help() {
+        return "/start - welcome to the club buddy...";
     }
 }

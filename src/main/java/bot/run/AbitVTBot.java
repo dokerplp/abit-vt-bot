@@ -1,17 +1,17 @@
 package bot.run;
 
+import bot.commands.Command;
 import bot.commands.Invoker;
 import bot.commands.Receiver;
 import bot.util.BotUpdatesHandler;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.meta.api.interfaces.Validable;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
+import java.util.Map;
 
 public class AbitVTBot extends TelegramLongPollingBot {
 
@@ -51,5 +51,9 @@ public class AbitVTBot extends TelegramLongPollingBot {
 
     public void invoke(String command, Update update) throws TelegramApiException {
         invoker.execute(command, update);
+    }
+
+    public Map<String, Command> availableCommands(){
+        return invoker.getCommandMap();
     }
 }

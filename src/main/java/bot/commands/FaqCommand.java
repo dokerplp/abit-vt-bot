@@ -8,4 +8,9 @@ public class FaqCommand implements Command{
     public void execute(Update update) throws TelegramApiException {
 
     }
+
+    @Override
+    public String help() {
+        return "/faq - common questions";
+    }
 }

@@ -8,4 +8,9 @@ public class LinksCommand implements Command{
     public void execute(Update update) throws TelegramApiException {
 
     }
+
+    @Override
+    public String help() {
+        return "/links - get useful links";
+    }
 }

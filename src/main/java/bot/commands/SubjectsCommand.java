@@ -8,4 +8,9 @@ public class SubjectsCommand implements Command{
     public void execute(Update update) throws TelegramApiException {
 
     }
+
+    @Override
+    public String help() {
+        return "/subjects - get list of subjects and their description";
+    }
 }

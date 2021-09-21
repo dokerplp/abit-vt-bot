@@ -8,4 +8,9 @@ public class PlanCommand implements Command{
     public void execute(Update update) throws TelegramApiException {
 
     }
+
+    @Override
+    public String help() {
+        return "/plan - get syllabus of vt";
+    }
 }
