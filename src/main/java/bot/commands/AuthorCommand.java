@@ -26,9 +26,6 @@ public class AuthorCommand implements Command{
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
         sendMessage.setText(toString());
-       // sendMessage.setParseMode("MarkdownV2");
-
-
 
         bot.execute(sendMessage);
     }
@@ -47,8 +44,8 @@ public class AuthorCommand implements Command{
     public String toString() {
         return "Hi\uD83D\uDC4B\n" +
                 "I'm the author of this bot\uD83E\uDD16\n" +
-                "My name is Valerii Butorin, I'm 2nd year student of Informatics and Computer Science (IVT) in ITMO\n" +
-                "My tg is @dokerplp\n\n\n" +
+                "My name is Valerii Butorin, I'm 2nd year student of Informatics and Computer Science (IVT) in ITMO\n\n" +
+                "*My tg is @dokerplp*\n\n\n" +
                 "[Project on GitHub](https://github.com/dokerplp/abit-vt-bot)";
     }
 }
