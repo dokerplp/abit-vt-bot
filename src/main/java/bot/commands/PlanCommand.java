@@ -13,4 +13,9 @@ public class PlanCommand implements Command{
     public String help() {
         return "/plan - get syllabus of vt";
     }
+
+    @Override
+    public String name() {
+        return "/plan";
+    }
 }

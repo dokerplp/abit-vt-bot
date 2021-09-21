@@ -13,4 +13,9 @@ public class SubjectsCommand implements Command{
     public String help() {
         return "/subjects - get list of subjects and their description";
     }
+
+    @Override
+    public String name() {
+        return "/subjects";
+    }
 }

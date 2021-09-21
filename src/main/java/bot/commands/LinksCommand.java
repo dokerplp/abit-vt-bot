@@ -13,4 +13,9 @@ public class LinksCommand implements Command{
     public String help() {
         return "/links - get useful links";
     }
+
+    @Override
+    public String name() {
+        return "/links";
+    }
 }

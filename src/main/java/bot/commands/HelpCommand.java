@@ -33,6 +33,7 @@ public class HelpCommand implements Command{
         for (Command command : bot.availableCommands().values()){
             InlineKeyboardButton button = new InlineKeyboardButton();
             button.setText(command.help());
+            button.setCallbackData(command.name());
             List<InlineKeyboardButton> bl = new ArrayList<>();
             bl.add(button);
             buttons.add(bl);
@@ -40,7 +41,6 @@ public class HelpCommand implements Command{
 
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(buttons);
 
-        sendMessage.setAllowSendingWithoutReply(true);
         sendMessage.setReplyMarkup(keyboard);
 
         bot.execute(sendMessage);
@@ -49,5 +49,10 @@ public class HelpCommand implements Command{
     @Override
     public String help() {
         return "/help - show list of available commands";
+    }
+
+    @Override
+    public String name() {
+        return "/help";
     }
 }

@@ -45,4 +45,9 @@ public class StartCommand implements Command{
     public String help() {
         return "/start - welcome to the club buddy...";
     }
+
+    @Override
+    public String name() {
+        return "/start";
+    }
 }

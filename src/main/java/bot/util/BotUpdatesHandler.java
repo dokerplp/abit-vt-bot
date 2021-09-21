@@ -20,10 +20,14 @@ public class BotUpdatesHandler implements UpdatesHandler {
     }
 
     public void newUpdate(Update update) throws TelegramApiException {
-        if (update.hasMessage()){
+        if (update.hasMessage()) {
             Message message = update.getMessage();
 
             String text = message.getText().split(" ")[0];
+            if (text.startsWith("/")) bot.invoke(text, update);
+
+        } else if(update.hasCallbackQuery()){
+            String text = update.getCallbackQuery().getData();
             if (text.startsWith("/")) bot.invoke(text, update);
         }
     }

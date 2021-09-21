@@ -13,4 +13,9 @@ public class FaqCommand implements Command{
     public String help() {
         return "/faq - common questions";
     }
+
+    @Override
+    public String name() {
+        return "/faq";
+    }
 }
