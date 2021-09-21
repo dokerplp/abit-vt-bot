@@ -3,7 +3,14 @@ package bot.commands;
 import bot.run.AbitVTBot;
 
 public class Receiver {
-    public void setCommands(AbitVTBot bot, Invoker invoker){
-        invoker.add("help", new HelpCommand(bot));
+
+    private final AbitVTBot bot;
+
+    public Receiver(AbitVTBot bot) {
+        this.bot = bot;
+    }
+
+    public void setCommands(Invoker invoker){
+        invoker.add("/help", new HelpCommand(bot));
     }
 }

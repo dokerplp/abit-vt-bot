@@ -2,9 +2,11 @@ package bot.util;
 
 import bot.run.AbitVTBot;
 import org.telegram.telegrambots.meta.api.interfaces.Validable;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.UpdatesHandler;
 
 import java.util.Optional;
@@ -17,14 +19,12 @@ public class BotUpdatesHandler implements UpdatesHandler {
         this.bot = bot;
     }
 
-    public void newUpdate(Update update){
+    public void newUpdate(Update update) throws TelegramApiException {
         if (update.hasMessage()){
             Message message = update.getMessage();
-            Optional<MessageEntity> commandEntity = message.getEntities().stream().filter(e -> "bot_command".equals(e.getType())).findFirst();
-            if (commandEntity.isPresent()){
-                String command = message.getText().substring(commandEntity.get().getOffset(), commandEntity.get().getLength());
 
-            }
+            String text = message.getText().split(" ")[0];
+            if (text.startsWith("/")) bot.invoke(text, update);
         }
     }
 }

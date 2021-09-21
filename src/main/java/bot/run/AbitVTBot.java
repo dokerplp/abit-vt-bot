@@ -21,10 +21,10 @@ public class AbitVTBot extends TelegramLongPollingBot {
 
     public AbitVTBot() {
         this.updatesHandler = new BotUpdatesHandler(this);
-        this.invoker = new Invoker();
-        this.receiver = new Receiver();
+        this.invoker = new Invoker(this);
+        this.receiver = new Receiver(this);
 
-        receiver.setCommands(this, invoker);
+        receiver.setCommands(invoker);
     }
 
     public static void main(String[] args) throws TelegramApiException {
@@ -46,9 +46,10 @@ public class AbitVTBot extends TelegramLongPollingBot {
     @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage()){
-            Message message = update.getMessage();
-            execute(SendMessage.builder().chatId(message.getChatId().toString()).text(message.getText()).build());
-        }
+        updatesHandler.newUpdate(update);
+    }
+
+    public void invoke(String command, Update update) throws TelegramApiException {
+        invoker.execute(command, update);
     }
 }
