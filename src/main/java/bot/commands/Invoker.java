@@ -6,11 +6,12 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Invoker {
     private final AbitVTBot bot;
-    private final Map<String, Command> commandMap = new HashMap<>();
+    private final Map<String, Command> commandMap = new LinkedHashMap<>();
 
     public Invoker(AbitVTBot bot) {
         this.bot = bot;

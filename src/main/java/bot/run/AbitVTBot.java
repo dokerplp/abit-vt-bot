@@ -17,12 +17,11 @@ public class AbitVTBot extends TelegramLongPollingBot {
 
     private final BotUpdatesHandler updatesHandler;
     private final Invoker invoker;
-    private final Receiver receiver;
 
     public AbitVTBot() {
         this.updatesHandler = new BotUpdatesHandler(this);
         this.invoker = new Invoker(this);
-        this.receiver = new Receiver(this);
+        Receiver receiver = new Receiver(this);
 
         receiver.setCommands(invoker);
     }

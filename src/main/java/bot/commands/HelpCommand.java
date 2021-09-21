@@ -31,7 +31,7 @@ public class HelpCommand implements Command{
         if (message != null) chatId = message.getChatId().toString();
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
-        sendMessage.setText("Hello");
+        sendMessage.setText("Hi, this is list of my commands");
 
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 

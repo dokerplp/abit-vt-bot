@@ -12,6 +12,11 @@ public class Receiver {
 
     public void setCommands(Invoker invoker){
         invoker.add("/help", new HelpCommand(bot));
+        invoker.add("/faq", new FaqCommand(bot));
+        invoker.add("/subjects", new SubjectsCommand(bot));
+        invoker.add("/links", new LinksCommand(bot));
+        invoker.add("/plan", new PlanCommand(bot));
+        invoker.add("/author", new AuthorCommand(bot));
         invoker.add("/start", new StartCommand(bot));
     }
 }
