@@ -12,5 +12,6 @@ public class Receiver {
 
     public void setCommands(Invoker invoker){
         invoker.add("/help", new HelpCommand(bot));
+        invoker.add("/start", new StartCommand(bot));
     }
 }
