@@ -1,8 +1,6 @@
-{
-  "links": [
-    {
-      "text": "Main VT site",
-      "link" : "se.ifmo.ru"
-    }
-  ]
-}
+[
+  {
+    "text": "Main VT site",
+    "link": "se.ifmo.ru"
+  }
+]
