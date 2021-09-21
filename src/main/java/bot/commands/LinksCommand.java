@@ -1,6 +1,8 @@
 package bot.commands;
 
 import bot.run.AbitVTBot;
+import com.google.common.io.Resources;
+import com.sun.research.ws.wadl.Resource;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -10,10 +12,13 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import sun.misc.ClassLoaderUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -41,7 +46,9 @@ public class LinksCommand implements Command {
 
         JSONParser parser = new JSONParser();
 
-        try (Reader reader = new FileReader("links.json")) {
+        URL file = Resources.getResource("links.json");
+        try (
+                Reader reader = new FileReader(file.getFile())) {
             JSONObject obj = (JSONObject) parser.parse(reader);
             List<JSONObject> links = new LinkedList<>(Arrays.asList((JSONObject[]) obj.get("links")));
 
@@ -63,7 +70,7 @@ public class LinksCommand implements Command {
             bot.execute(sendMessage);
 
         } catch (IOException | ParseException e) {
-
+            System.out.println("error");
         }
 
     }
