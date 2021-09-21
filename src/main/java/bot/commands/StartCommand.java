@@ -24,10 +24,13 @@ public class StartCommand implements Command{
 
     @Override
     public void execute(Update update) throws TelegramApiException {
+        String chatId;
+
         Message message = update.getMessage();
         SendMessage sendMessage = new SendMessage();
-        if (message != null) sendMessage.setChatId(message.getChatId().toString());
-        else sendMessage.setChatId(update.getCallbackQuery().getMessage().getChatId().toString());
+        if (message != null) chatId = message.getChatId().toString();
+        else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
+        sendMessage.setChatId(chatId);
         sendMessage.setText("Welcome to the club buddy!");
 
 
@@ -35,7 +38,7 @@ public class StartCommand implements Command{
         sticker.setFileId(Stickers.WELCOME_TO_THE_CLUB.toString());
 
         SendSticker sendSticker = new SendSticker();
-        sendSticker.setChatId(message.getChatId().toString());
+        sendSticker.setChatId(chatId);
         sendSticker.setSticker(new InputFile().setMedia(Stickers.WELCOME_TO_THE_CLUB.toString()));
 
         bot.execute(sendSticker);

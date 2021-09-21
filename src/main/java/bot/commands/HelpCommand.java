@@ -23,10 +23,14 @@ public class HelpCommand implements Command{
 
     @Override
     public void execute(Update update) throws TelegramApiException {
+
+        String chatId;
+
         Message message = update.getMessage();
         SendMessage sendMessage = new SendMessage();
-        if (message != null) sendMessage.setChatId(message.getChatId().toString());
-        else sendMessage.setChatId(update.getCallbackQuery().getMessage().getChatId().toString());
+        if (message != null) chatId = message.getChatId().toString();
+        else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
+        sendMessage.setChatId(chatId);
         sendMessage.setText("Hello");
 
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
