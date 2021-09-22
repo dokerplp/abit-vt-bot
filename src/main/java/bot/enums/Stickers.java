@@ -1,5 +1,13 @@
 package bot.enums;
 
+import bot.run.AbitVTBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.stickers.Sticker;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
 import java.io.Serializable;
 
 public enum Stickers implements Serializable {
@@ -17,5 +25,19 @@ public enum Stickers implements Serializable {
     @Override
     public String toString() {
         return id;
+    }
+
+    public void sendSticker(AbitVTBot bot, Update update) throws TelegramApiException {
+
+        String chatId;
+        Message message = update.getMessage();
+        if (message != null) chatId = message.getChatId().toString();
+        else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
+
+        SendSticker sendSticker = new SendSticker();
+        sendSticker.setChatId(chatId);
+        sendSticker.setSticker(new InputFile().setMedia(toString()));
+
+        bot.execute(sendSticker);
     }
 }

@@ -1,8 +1,10 @@
 package bot.util;
 
+import bot.enums.Stickers;
 import bot.run.AbitVTBot;
 import bot.test.StickerTest;
 import org.telegram.telegrambots.meta.api.interfaces.Validable;
+import org.telegram.telegrambots.meta.api.methods.send.SendDice;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
@@ -21,13 +23,23 @@ public class BotUpdatesHandler implements UpdatesHandler {
 
     public void newUpdate(Update update) throws TelegramApiException {
 
-        StickerTest.getStickerID(update);
+        //StickerTest.getStickerID(update);
 
         if (update.hasMessage()) {
             Message message = update.getMessage();
 
-            String text = message.getText().split(" ")[0];
-            if (text.startsWith("/")) bot.invoke(text, update);
+            if (message.hasText()){
+                String text = message.getText().split(" ")[0];
+                if (text.startsWith("/")) bot.invoke(text, update);
+            }
+            else if (message.hasVoice()){
+                Stickers.VOICE.sendSticker(bot, update);
+            }
+            else {
+                SendDice dice = new SendDice();
+                dice.setChatId(message.getChatId().toString());
+                bot.execute(dice);
+            }
 
         } else if(update.hasCallbackQuery()){
 

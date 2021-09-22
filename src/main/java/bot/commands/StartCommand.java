@@ -34,14 +34,8 @@ public class StartCommand implements Command{
         sendMessage.setText("Welcome to the club buddy!");
 
 
-        Sticker sticker = new Sticker();
-        sticker.setFileId(Stickers.WELCOME_TO_THE_CLUB.toString());
+        Stickers.WELCOME_TO_THE_CLUB.sendSticker(bot, update);
 
-        SendSticker sendSticker = new SendSticker();
-        sendSticker.setChatId(chatId);
-        sendSticker.setSticker(new InputFile().setMedia(Stickers.WELCOME_TO_THE_CLUB.toString()));
-
-        bot.execute(sendSticker);
         bot.execute(sendMessage);
     }
 
