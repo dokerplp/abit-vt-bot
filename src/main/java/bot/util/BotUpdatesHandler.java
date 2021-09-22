@@ -1,15 +1,15 @@
 package bot.util;
 
 import bot.run.AbitVTBot;
+import bot.test.StickerTest;
 import org.telegram.telegrambots.meta.api.interfaces.Validable;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.stickers.Sticker;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.UpdatesHandler;
-
-import java.util.Optional;
 
 public class BotUpdatesHandler implements UpdatesHandler {
 
@@ -20,6 +20,9 @@ public class BotUpdatesHandler implements UpdatesHandler {
     }
 
     public void newUpdate(Update update) throws TelegramApiException {
+
+        StickerTest.getStickerID(update);
+
         if (update.hasMessage()) {
             Message message = update.getMessage();
 
