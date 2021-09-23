@@ -1,5 +1,6 @@
 package bot.util.settings;
 
+import bot.enums.Language;
 import bot.run.AbitVTBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -22,6 +23,8 @@ public class RU implements Setting {
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
         sendMessage.setText("Язык был сменен на русский");
+
+        bot.setLanguage(Language.RU);
 
         bot.execute(sendMessage);
     }
