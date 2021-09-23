@@ -17,6 +17,7 @@ public class Receiver {
         invoker.add("/links", new LinksCommand(bot));
         invoker.add("/plan", new PlanCommand(bot));
         invoker.add("/author", new AuthorCommand(bot));
+        invoker.add("/settings", new SettingsCommand(bot));
         invoker.add("/start", new StartCommand(bot));
     }
 }
