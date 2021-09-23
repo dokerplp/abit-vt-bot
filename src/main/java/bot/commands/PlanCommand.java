@@ -34,23 +34,28 @@ public class PlanCommand implements Command{
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendDocument.setChatId(chatId);
 
-
-       // sendDocument.setDocument(new InputFile().setMedia());
-
-//        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-//        InlineKeyboardButton button = new InlineKeyboardButton();
-//        button.setText("Custom syllabus");
-//        button.setUrl("https://docs.google.com/spreadsheets/d/1NlrnPsPksHXzEHFnSHtUtbJg5AENXx6pVFBevHIg-4k/edit#gid=1824976275");
-//
-//        List<InlineKeyboardButton> bl = new ArrayList<>();
-//        bl.add(button);
-//        buttons.add(bl);
-//
-//        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(buttons);
-//
-//        sendDocument.setReplyMarkup(keyboard);
+        InputFile plans = new InputFile();
+        plans.setMedia("https://eduold-prod.itmo.dev/file/subspec/4285/09.03.01_kompyuternye_sistemy_i_tehnologii_14549.pdf");
+        sendDocument.setDocument(plans);
 
         sendDocument.setAllowSendingWithoutReply(true);
+        bot.execute(sendDocument);
+
+        plans.setMedia("https://eduold-prod.itmo.dev/file/subspec/4290/09.03.04_44.03.04_kompyuternye_tehnologii_v_dizayne_14546_14547.pdf");
+
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+        InlineKeyboardButton button = new InlineKeyboardButton();
+        button.setText("Custom syllabus");
+        button.setUrl("https://docs.google.com/spreadsheets/d/1NlrnPsPksHXzEHFnSHtUtbJg5AENXx6pVFBevHIg-4k/edit#gid=1824976275");
+
+        List<InlineKeyboardButton> bl = new ArrayList<>();
+        bl.add(button);
+        buttons.add(bl);
+
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(buttons);
+
+        sendDocument.setReplyMarkup(keyboard);
+
         bot.execute(sendDocument);
     }
 
