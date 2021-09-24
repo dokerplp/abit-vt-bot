@@ -1,20 +1,19 @@
 package bot.commands;
 
+import bot.enums.Language;
 import bot.enums.Stickers;
 import bot.run.AbitVTBot;
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
-import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
+import bot.util.Translatable;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.stickers.Sticker;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.io.*;
+import java.util.ResourceBundle;
 
-public class StartCommand implements Command{
+public class StartCommand implements Command {
+
+    private String TEXT;
 
     private final AbitVTBot bot;
 

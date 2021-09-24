@@ -1,6 +1,8 @@
 package bot.commands;
 
+import bot.enums.Language;
 import bot.run.AbitVTBot;
+import bot.util.Translatable;
 import com.google.common.io.Resources;
 import com.sun.research.ws.wadl.Resource;
 import org.json.simple.JSONArray;
@@ -22,12 +24,17 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.*;
 
-public class LinksCommand implements Command {
+public class LinksCommand implements Command, Translatable {
+
+    private String HELP;
+    private String TEXT;
 
     private final AbitVTBot bot;
 
     public LinksCommand(AbitVTBot bot) {
         this.bot = bot;
+        bot.getTranslator().add(this);
+        translate(Language.EN);
     }
 
     @Override
@@ -40,7 +47,7 @@ public class LinksCommand implements Command {
         if (message != null) chatId = message.getChatId().toString();
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
-        sendMessage.setText("The most useful links");
+        sendMessage.setText(TEXT);
 
         JSONParser parser = new JSONParser();
 
@@ -77,11 +84,20 @@ public class LinksCommand implements Command {
 
     @Override
     public String help() {
-        return "/links - get useful links";
+        return HELP;
     }
 
     @Override
     public String name() {
         return "/links";
+    }
+
+    @Override
+    public void translate(Language language) {
+        ResourceBundle helpBundle = ResourceBundle.getBundle("help", language.getLocale());
+        ResourceBundle otherBundle = ResourceBundle.getBundle("other", language.getLocale());
+
+        HELP = helpBundle.getString("links");
+        TEXT = otherBundle.getString("links.text");
     }
 }

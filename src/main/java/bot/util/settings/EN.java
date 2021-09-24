@@ -2,12 +2,15 @@ package bot.util.settings;
 
 import bot.enums.Language;
 import bot.run.AbitVTBot;
+import bot.util.Translatable;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public class EN implements Setting {
+import java.util.ResourceBundle;
+
+public class EN implements Setting{
     private final AbitVTBot bot;
 
     public EN(AbitVTBot bot) {
@@ -25,6 +28,7 @@ public class EN implements Setting {
         sendMessage.setText("Language was changed to english");
 
         bot.setLanguage(Language.EN);
+        bot.getTranslator().translate(Language.EN);
 
         bot.execute(sendMessage);
     }

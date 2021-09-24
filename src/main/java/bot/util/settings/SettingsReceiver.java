@@ -10,7 +10,9 @@ public class SettingsReceiver {
     }
 
     public void setSettings(SettingsInvoker invoker) {
-        invoker.add("⚙️ Settings \uD83D\uDEE0", new Settings(bot));
+        Settings settings = new Settings(bot);
+        invoker.add("⚙️ Settings \uD83D\uDEE0", settings);
+        invoker.add("⚙️ Настройки \uD83D\uDEE0", settings);
         invoker.add("⚙️ En \uD83C\uDDFA\uD83C\uDDF8", new EN(bot));
         invoker.add("⚙️ Ru \uD83C\uDDF7\uD83C\uDDFA", new RU(bot));
     }

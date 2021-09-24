@@ -5,6 +5,8 @@ import bot.commands.Invoker;
 import bot.commands.Receiver;
 import bot.enums.Language;
 import bot.util.BotUpdatesHandler;
+import bot.util.Translatable;
+import bot.util.settings.Translator;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -19,6 +21,8 @@ public class AbitVTBot extends TelegramLongPollingBot {
     private Language language = Language.EN;
     private final BotUpdatesHandler updatesHandler;
     private final Invoker invoker;
+
+    private final Translator translator = new Translator();
 
     public AbitVTBot() {
         this.updatesHandler = new BotUpdatesHandler(this);
@@ -64,5 +68,9 @@ public class AbitVTBot extends TelegramLongPollingBot {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public Translator getTranslator() {
+        return translator;
     }
 }

@@ -4,7 +4,7 @@ import java.util.Locale;
 
 public enum Language {
     RU(new Locale("ru", "RU")),
-    EN(new Locale("en", "EN"));
+    EN(Locale.US);
 
     private final Locale locale;
 
