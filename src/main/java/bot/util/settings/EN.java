@@ -24,7 +24,7 @@ public class EN implements Setting{
         sendMessage.setChatId(chatId);
         sendMessage.setText("Language was changed to english");
 
-        bot.getSql().insertLanguage(Long.valueOf(chatId), Language.EN);
+        bot.getSql().updateLanguage(chatId, Language.EN);
 
         bot.execute(sendMessage);
     }

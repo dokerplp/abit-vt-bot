@@ -5,6 +5,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public interface Command {
     void execute(Update update) throws TelegramApiException;
-    String help(Long chatId);
+    String help(String chatId);
     String name();
 }

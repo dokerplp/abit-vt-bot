@@ -16,11 +16,11 @@ public class SqlFunctions {
         this.connection = connection;
     }
 
-    public boolean insertLanguage(Long chatId, Language language){
+    public boolean insertLanguage(String chatId, Language language){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SqlScripts.INSERT_LANGUAGE);
 
-            preparedStatement.setLong(1, chatId);
+            preparedStatement.setLong(1, Long.parseLong(chatId));
             preparedStatement.setString(2, language.toString());
 
             preparedStatement.execute();
@@ -32,11 +32,27 @@ public class SqlFunctions {
         }
     }
 
-    public Language selectLanguage(Long chatId){
+    public boolean updateLanguage(String chatId, Language language){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SqlScripts.UPDATE_LANGUAGE);
+
+            preparedStatement.setLong(2, Long.parseLong(chatId));
+            preparedStatement.setString(1, language.toString());
+
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+    }
+
+    public Language selectLanguage(String chatId){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SqlScripts.SELECT_LANGUAGE);
 
-            preparedStatement.setLong(1, chatId);
+            preparedStatement.setLong(1, Long.parseLong(chatId));
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

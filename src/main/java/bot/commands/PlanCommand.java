@@ -1,6 +1,5 @@
 package bot.commands;
 
-import bot.enums.Language;
 import bot.run.AbitVTBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -16,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class PlanCommand implements Command {
 
-    private String getTEXT(Long chatId){
+    private String getTEXT(String chatId){
         ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
         return otherBundle.getString("plan.text");
     }
@@ -49,7 +48,7 @@ public class PlanCommand implements Command {
 
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
         InlineKeyboardButton button = new InlineKeyboardButton();
-        button.setText(getTEXT(Long.valueOf(chatId)));
+        button.setText(getTEXT(chatId));
         button.setUrl("https://docs.google.com/spreadsheets/d/1NlrnPsPksHXzEHFnSHtUtbJg5AENXx6pVFBevHIg-4k/edit#gid=1824976275");
 
         List<InlineKeyboardButton> bl = new ArrayList<>();
@@ -64,7 +63,7 @@ public class PlanCommand implements Command {
     }
 
     @Override
-    public String help(Long chatId) {
+    public String help(String chatId) {
         ResourceBundle helpBundle = ResourceBundle.getBundle("help", bot.getSql().selectLanguage(chatId).getLocale());
         return helpBundle.getString("plan");
     }

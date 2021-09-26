@@ -35,7 +35,7 @@ public class StartCommand implements Command {
     }
 
     @Override
-    public String help(Long chatId) {
+    public String help(String chatId) {
         return "/start - welcome to the club buddy...";
     }
 

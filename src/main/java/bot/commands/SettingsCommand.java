@@ -1,6 +1,5 @@
 package bot.commands;
 
-import bot.enums.Language;
 import bot.run.AbitVTBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -15,12 +14,12 @@ import java.util.ResourceBundle;
 
 public class SettingsCommand implements Command {
 
-    private String getTEXT(Long chatId){
+    private String getTEXT(String chatId){
         ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
         return otherBundle.getString("settings.text");
     }
 
-    private String getSETTINGS(Long chatId){
+    private String getSETTINGS(String chatId){
         ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
         return otherBundle.getString("settings.settings");
     }
@@ -41,14 +40,14 @@ public class SettingsCommand implements Command {
         if (message != null) chatId = message.getChatId().toString();
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
-        sendMessage.setText(getTEXT(Long.valueOf(chatId)));
+        sendMessage.setText(getTEXT(chatId));
 
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();
 
         keyboardMarkup.setResizeKeyboard(true);
-        row.add(getSETTINGS(Long.valueOf(chatId)));
+        row.add(getSETTINGS(chatId));
 
         keyboard.add(row);
         keyboardMarkup.setKeyboard(keyboard);
@@ -58,7 +57,7 @@ public class SettingsCommand implements Command {
     }
 
     @Override
-    public String help(Long chatId) {
+    public String help(String chatId) {
         ResourceBundle helpBundle = ResourceBundle.getBundle("help", bot.getSql().selectLanguage(chatId).getLocale());
         return helpBundle.getString("settings");
     }

@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 
 public class AuthorCommand implements Command {
 
-    public String getGREETING(Long chatId) {
+    public String getGREETING(String chatId) {
         ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
         return otherBundle.getString("author.greeting");
     }
@@ -33,13 +33,13 @@ public class AuthorCommand implements Command {
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
-        sendMessage.setText(getGREETING(Long.valueOf(chatId)));
+        sendMessage.setText(getGREETING(chatId));
 
         bot.execute(sendMessage);
     }
 
     @Override
-    public String help(Long chatId) {
+    public String help(String chatId) {
         ResourceBundle helpBundle = ResourceBundle.getBundle("help", bot.getSql().selectLanguage(chatId).getLocale());
         return helpBundle.getString("author");
     }

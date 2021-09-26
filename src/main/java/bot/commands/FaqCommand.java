@@ -1,6 +1,5 @@
 package bot.commands;
 
-import bot.enums.Language;
 import bot.run.AbitVTBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -21,7 +20,7 @@ public class FaqCommand implements Command{
     }
 
     @Override
-    public String help(Long chatId) {
+    public String help(String chatId) {
         ResourceBundle helpBundle = ResourceBundle.getBundle("help", bot.getSql().selectLanguage(chatId).getLocale());
         return helpBundle.getString("faq");
     }

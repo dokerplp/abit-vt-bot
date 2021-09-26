@@ -1,6 +1,5 @@
 package bot.commands;
 
-import bot.enums.Language;
 import bot.run.AbitVTBot;
 import com.google.common.io.Resources;
 import org.json.simple.JSONArray;
@@ -22,7 +21,7 @@ import java.util.*;
 
 public class LinksCommand implements Command{
 
-    private String getTEXT(Long chatId){
+    private String getTEXT(String chatId){
         ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
         return otherBundle.getString("links.text");
     }
@@ -43,7 +42,7 @@ public class LinksCommand implements Command{
         if (message != null) chatId = message.getChatId().toString();
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
-        sendMessage.setText(getTEXT(Long.valueOf(chatId)));
+        sendMessage.setText(getTEXT(chatId));
 
         JSONParser parser = new JSONParser();
 
@@ -79,7 +78,7 @@ public class LinksCommand implements Command{
     }
 
     @Override
-    public String help(Long chatId) {
+    public String help(String chatId) {
         ResourceBundle helpBundle = ResourceBundle.getBundle("help", bot.getSql().selectLanguage(chatId).getLocale());
         return helpBundle.getString("links");
     }

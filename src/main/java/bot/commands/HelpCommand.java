@@ -1,6 +1,5 @@
 package bot.commands;
 
-import bot.enums.Language;
 import bot.run.AbitVTBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -15,7 +14,7 @@ import java.util.ResourceBundle;
 
 public class HelpCommand implements Command {
 
-    private String getTEXT(Long chatId){
+    private String getTEXT(String chatId){
         ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
         return otherBundle.getString("help.text");
     }
@@ -36,13 +35,13 @@ public class HelpCommand implements Command {
         if (message != null) chatId = message.getChatId().toString();
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
-        sendMessage.setText(getTEXT(Long.valueOf(chatId)));
+        sendMessage.setText(getTEXT(chatId));
 
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
         for (Command command : bot.availableCommands().values()){
             InlineKeyboardButton button = new InlineKeyboardButton();
-            button.setText(command.help(Long.valueOf(chatId)));
+            button.setText(command.help(chatId));
             button.setCallbackData(command.name());
             List<InlineKeyboardButton> bl = new ArrayList<>();
             bl.add(button);
@@ -57,7 +56,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public String help(Long chatId) {
+    public String help(String chatId) {
         ResourceBundle helpBundle = ResourceBundle.getBundle("help", bot.getSql().selectLanguage(chatId).getLocale());
         return helpBundle.getString("help");
     }
