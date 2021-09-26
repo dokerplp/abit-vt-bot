@@ -4,6 +4,7 @@ import bot.commands.Command;
 import bot.commands.Invoker;
 import bot.commands.Receiver;
 import bot.util.BotUpdatesHandler;
+import bot.util.CommandsUtil;
 import bot.util.Log;
 import bot.util.database.DatabaseConnection;
 import bot.util.database.SqlFunctions;
@@ -32,14 +33,15 @@ public class AbitVTBot extends TelegramLongPollingBot {
         Receiver receiver = new Receiver(this);
         this.sqlFunctions = new SqlFunctions(new DatabaseConnection().getConnection());
         receiver.setCommands(invoker);
-
         log.turnOn();
+        Runtime.getRuntime().addShutdownHook(new Thread(log::turnOff));
     }
 
     public static void main(String[] args) throws TelegramApiException {
         AbitVTBot bot = new AbitVTBot();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         telegramBotsApi.registerBot(bot);
+
     }
 
     @Override
@@ -61,6 +63,7 @@ public class AbitVTBot extends TelegramLongPollingBot {
             log.telegramApiException(e, update);
         } catch (Exception e){
             log.appError(e, update);
+            CommandsUtil.notifyAdmin(e, update);
         }
     }
 
