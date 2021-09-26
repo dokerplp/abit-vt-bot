@@ -2,10 +2,7 @@ package bot.commands;
 
 import bot.enums.Language;
 import bot.run.AbitVTBot;
-import bot.util.Translatable;
-import com.google.common.io.Resources;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -13,22 +10,21 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PlanCommand implements Command, Translatable {
+public class PlanCommand implements Command {
 
-    private String HELP;
-    private String TEXT;
+    private String getTEXT(Long chatId){
+        ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
+        return otherBundle.getString("plan.text");
+    }
 
     private final AbitVTBot bot;
 
     public PlanCommand(AbitVTBot bot) {
         this.bot = bot;
-        bot.getTranslator().add(this);
-        translate(Language.EN);
     }
 
     @Override
@@ -53,7 +49,7 @@ public class PlanCommand implements Command, Translatable {
 
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
         InlineKeyboardButton button = new InlineKeyboardButton();
-        button.setText(TEXT);
+        button.setText(getTEXT(Long.valueOf(chatId)));
         button.setUrl("https://docs.google.com/spreadsheets/d/1NlrnPsPksHXzEHFnSHtUtbJg5AENXx6pVFBevHIg-4k/edit#gid=1824976275");
 
         List<InlineKeyboardButton> bl = new ArrayList<>();
@@ -68,8 +64,9 @@ public class PlanCommand implements Command, Translatable {
     }
 
     @Override
-    public String help() {
-        return HELP;
+    public String help(Long chatId) {
+        ResourceBundle helpBundle = ResourceBundle.getBundle("help", bot.getSql().selectLanguage(chatId).getLocale());
+        return helpBundle.getString("plan");
     }
 
     @Override
@@ -77,12 +74,4 @@ public class PlanCommand implements Command, Translatable {
         return "/plan";
     }
 
-    @Override
-    public void translate(Language language) {
-        ResourceBundle helpBundle = ResourceBundle.getBundle("help", language.getLocale());
-        ResourceBundle otherBundle = ResourceBundle.getBundle("other", language.getLocale());
-
-        HELP = helpBundle.getString("plan");
-        TEXT = otherBundle.getString("plan.text");
-    }
 }

@@ -1,15 +1,11 @@
 package bot.commands;
 
-import bot.enums.Language;
 import bot.enums.Stickers;
 import bot.run.AbitVTBot;
-import bot.util.Translatable;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.ResourceBundle;
 
 public class StartCommand implements Command {
 
@@ -39,7 +35,7 @@ public class StartCommand implements Command {
     }
 
     @Override
-    public String help() {
+    public String help(Long chatId) {
         return "/start - welcome to the club buddy...";
     }
 

@@ -24,8 +24,7 @@ public class RU implements Setting {
         sendMessage.setChatId(chatId);
         sendMessage.setText("Язык был сменен на русский");
 
-        bot.setLanguage(Language.RU);
-        bot.getTranslator().translate(Language.RU);
+        bot.getSql().insertLanguage(Long.valueOf(chatId), Language.RU);
 
         bot.execute(sendMessage);
     }

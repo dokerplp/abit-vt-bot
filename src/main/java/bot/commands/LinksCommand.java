@@ -2,9 +2,7 @@ package bot.commands;
 
 import bot.enums.Language;
 import bot.run.AbitVTBot;
-import bot.util.Translatable;
 import com.google.common.io.Resources;
-import com.sun.research.ws.wadl.Resource;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,26 +13,24 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import sun.misc.ClassLoaderUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.util.*;
 
-public class LinksCommand implements Command, Translatable {
+public class LinksCommand implements Command{
 
-    private String HELP;
-    private String TEXT;
+    private String getTEXT(Long chatId){
+        ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
+        return otherBundle.getString("links.text");
+    }
 
     private final AbitVTBot bot;
 
     public LinksCommand(AbitVTBot bot) {
         this.bot = bot;
-        bot.getTranslator().add(this);
-        translate(Language.EN);
     }
 
     @Override
@@ -47,7 +43,7 @@ public class LinksCommand implements Command, Translatable {
         if (message != null) chatId = message.getChatId().toString();
         else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
-        sendMessage.setText(TEXT);
+        sendMessage.setText(getTEXT(Long.valueOf(chatId)));
 
         JSONParser parser = new JSONParser();
 
@@ -83,8 +79,9 @@ public class LinksCommand implements Command, Translatable {
     }
 
     @Override
-    public String help() {
-        return HELP;
+    public String help(Long chatId) {
+        ResourceBundle helpBundle = ResourceBundle.getBundle("help", bot.getSql().selectLanguage(chatId).getLocale());
+        return helpBundle.getString("links");
     }
 
     @Override
@@ -92,12 +89,4 @@ public class LinksCommand implements Command, Translatable {
         return "/links";
     }
 
-    @Override
-    public void translate(Language language) {
-        ResourceBundle helpBundle = ResourceBundle.getBundle("help", language.getLocale());
-        ResourceBundle otherBundle = ResourceBundle.getBundle("other", language.getLocale());
-
-        HELP = helpBundle.getString("links");
-        TEXT = otherBundle.getString("links.text");
-    }
 }

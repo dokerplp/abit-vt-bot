@@ -3,10 +3,9 @@ package bot.run;
 import bot.commands.Command;
 import bot.commands.Invoker;
 import bot.commands.Receiver;
-import bot.enums.Language;
 import bot.util.BotUpdatesHandler;
-import bot.util.Translatable;
-import bot.util.settings.Translator;
+import bot.util.database.DatabaseConnection;
+import bot.util.database.SqlFunctions;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -18,16 +17,18 @@ import java.util.Map;
 
 public class AbitVTBot extends TelegramLongPollingBot {
 
-    private Language language = Language.EN;
+    //private Language language = Language.EN;
     private final BotUpdatesHandler updatesHandler;
     private final Invoker invoker;
+    private final SqlFunctions sqlFunctions;
 
-    private final Translator translator = new Translator();
+    //private final Translator translator = new Translator();
 
     public AbitVTBot() {
         this.updatesHandler = new BotUpdatesHandler(this);
         this.invoker = new Invoker(this);
         Receiver receiver = new Receiver(this);
+        this.sqlFunctions = new SqlFunctions(new DatabaseConnection().getConnection());
 
         receiver.setCommands(invoker);
     }
@@ -62,15 +63,21 @@ public class AbitVTBot extends TelegramLongPollingBot {
         return invoker.getCommandMap();
     }
 
-    public Language getLanguage() {
-        return language;
+//    public Language getLanguage() {
+//        return language;
+//    }
+//
+//    public void setLanguage(Language language) {
+//        this.language = language;
+//    }
+//
+//    public Translator getTranslator() {
+//        return translator;
+//    }
+
+    public SqlFunctions getSql(){
+        return sqlFunctions;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
 
-    public Translator getTranslator() {
-        return translator;
-    }
 }
