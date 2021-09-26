@@ -1,6 +1,7 @@
 package bot.enums;
 
 import bot.run.AbitVTBot;
+import bot.util.CommandsUtil;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -13,7 +14,8 @@ import java.io.Serializable;
 public enum Stickers implements Serializable {
 
     WELCOME_TO_THE_CLUB("CAACAgIAAxkBAAOdYUo0m_syBRShgkKxCTjJqPWLC14AAh8AA_HzcxPzDm9d0wYLCiEE"),
-    VOICE("CAACAgIAAxkBAAIBMWFKc0fe3iVLjOG5iBrXuYb1e6EjAAIXAAOr26Y545BSbBihquIhBA");
+    VOICE("CAACAgIAAxkBAAIBMWFKc0fe3iVLjOG5iBrXuYb1e6EjAAIXAAOr26Y545BSbBihquIhBA"),
+    KOTIKI("CAACAgIAAxkBAAICp2FQwwXFjFrrzyHbDBrTQprgQWiQAAIrAAP2zkAb8nPTZBjynH8hBA");
 
     private final String id;
 
@@ -29,10 +31,7 @@ public enum Stickers implements Serializable {
 
     public void sendSticker(AbitVTBot bot, Update update) throws TelegramApiException {
 
-        String chatId;
-        Message message = update.getMessage();
-        if (message != null) chatId = message.getChatId().toString();
-        else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
+        String chatId = CommandsUtil.getChatId(update);
 
         SendSticker sendSticker = new SendSticker();
         sendSticker.setChatId(chatId);

@@ -1,6 +1,7 @@
 package bot.commands;
 
 import bot.run.AbitVTBot;
+import bot.util.CommandsUtil;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -29,12 +30,9 @@ public class PlanCommand implements Command {
     @Override
     public void execute(Update update) throws TelegramApiException {
 
-        String chatId;
+        String chatId = CommandsUtil.getChatId(update);
 
-        Message message = update.getMessage();
         SendDocument sendDocument = new SendDocument();
-        if (message != null) chatId = message.getChatId().toString();
-        else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendDocument.setChatId(chatId);
 
         InputFile plans = new InputFile();

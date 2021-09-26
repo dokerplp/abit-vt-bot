@@ -1,6 +1,7 @@
 package bot.util.database;
 
 import bot.enums.Language;
+import bot.util.Log;
 import org.postgresql.util.PSQLException;
 
 import java.sql.Connection;
@@ -9,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SqlFunctions {
+
+    private final Log log = new Log();
 
     private final Connection connection;
 
@@ -27,7 +30,7 @@ public class SqlFunctions {
 
             return true;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            log.userException(throwables);
             return false;
         }
     }
@@ -43,7 +46,7 @@ public class SqlFunctions {
 
             return true;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            log.userException(throwables);
             return false;
         }
     }
@@ -69,7 +72,7 @@ public class SqlFunctions {
             }
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            log.userException(throwables);
             return null;
         }
     }

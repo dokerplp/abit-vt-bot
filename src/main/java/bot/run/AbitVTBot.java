@@ -4,9 +4,12 @@ import bot.commands.Command;
 import bot.commands.Invoker;
 import bot.commands.Receiver;
 import bot.util.BotUpdatesHandler;
+import bot.util.Log;
 import bot.util.database.DatabaseConnection;
 import bot.util.database.SqlFunctions;
 import lombok.SneakyThrows;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -17,20 +20,20 @@ import java.util.Map;
 
 public class AbitVTBot extends TelegramLongPollingBot {
 
-    //private Language language = Language.EN;
+    private final Log log = new Log();
+
     private final BotUpdatesHandler updatesHandler;
     private final Invoker invoker;
     private final SqlFunctions sqlFunctions;
-
-    //private final Translator translator = new Translator();
 
     public AbitVTBot() {
         this.updatesHandler = new BotUpdatesHandler(this);
         this.invoker = new Invoker(this);
         Receiver receiver = new Receiver(this);
         this.sqlFunctions = new SqlFunctions(new DatabaseConnection().getConnection());
-
         receiver.setCommands(invoker);
+
+        log.turnOn();
     }
 
     public static void main(String[] args) throws TelegramApiException {
@@ -49,10 +52,16 @@ public class AbitVTBot extends TelegramLongPollingBot {
         return System.getenv("BOT_TOKEN");
     }
 
-    @SneakyThrows
+
     @Override
     public void onUpdateReceived(Update update) {
-        updatesHandler.newUpdate(update);
+        try {
+            updatesHandler.newUpdate(update);
+        } catch (TelegramApiException e) {
+            log.telegramApiException(e, update);
+        } catch (Exception e){
+            log.appError(e, update);
+        }
     }
 
     public void invoke(String command, Update update) throws TelegramApiException {
@@ -62,18 +71,6 @@ public class AbitVTBot extends TelegramLongPollingBot {
     public Map<String, Command> availableCommands() {
         return invoker.getCommandMap();
     }
-
-//    public Language getLanguage() {
-//        return language;
-//    }
-//
-//    public void setLanguage(Language language) {
-//        this.language = language;
-//    }
-//
-//    public Translator getTranslator() {
-//        return translator;
-//    }
 
     public SqlFunctions getSql(){
         return sqlFunctions;

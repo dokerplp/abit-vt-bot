@@ -1,6 +1,7 @@
 package bot.commands;
 
 import bot.run.AbitVTBot;
+import bot.util.CommandsUtil;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -15,7 +16,6 @@ public class AuthorCommand implements Command {
         return otherBundle.getString("author.greeting");
     }
 
-
     private final AbitVTBot bot;
 
     public AuthorCommand(AbitVTBot bot) {
@@ -25,12 +25,9 @@ public class AuthorCommand implements Command {
     @Override
     public void execute(Update update) throws TelegramApiException {
 
-        String chatId;
+        String chatId = CommandsUtil.getChatId(update);
 
-        Message message = update.getMessage();
         SendMessage sendMessage = new SendMessage();
-        if (message != null) chatId = message.getChatId().toString();
-        else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
         sendMessage.setText(getGREETING(chatId));

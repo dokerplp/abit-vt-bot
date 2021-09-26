@@ -23,7 +23,7 @@ public class SettingsInvoker {
         Setting setting = settingMap.get(key);
         if (setting != null) setting.execute(update);
         else {
-            textHandler.text(key);
+            textHandler.text(key, update);
         }
 
     }

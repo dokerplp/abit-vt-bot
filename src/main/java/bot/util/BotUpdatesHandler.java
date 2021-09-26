@@ -18,9 +18,6 @@ public class BotUpdatesHandler implements UpdatesHandler {
     }
 
     public void newUpdate(Update update) throws TelegramApiException {
-
-        //StickerTest.getStickerID(update);
-
         if (update.hasMessage()) {
             Message message = update.getMessage();
 
@@ -31,6 +28,8 @@ public class BotUpdatesHandler implements UpdatesHandler {
             }
             else if (message.hasVoice()){
                 Stickers.VOICE.sendSticker(bot, update);
+            } else if (message.hasSticker()) {
+                System.out.println(message.getSticker().getFileId());
             }
 
         } else if(update.hasCallbackQuery()){

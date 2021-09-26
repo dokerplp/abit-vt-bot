@@ -1,6 +1,7 @@
 package bot.commands;
 
 import bot.run.AbitVTBot;
+import bot.util.CommandsUtil;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -34,11 +35,9 @@ public class SettingsCommand implements Command {
     @Override
     public void execute(Update update) throws TelegramApiException {
 
-        String chatId;
+        String chatId = CommandsUtil.getChatId(update);
+
         SendMessage sendMessage = new SendMessage();
-        Message message = update.getMessage();
-        if (message != null) chatId = message.getChatId().toString();
-        else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
         sendMessage.setText(getTEXT(chatId));
 

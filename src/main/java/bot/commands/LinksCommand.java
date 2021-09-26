@@ -1,6 +1,7 @@
 package bot.commands;
 
 import bot.run.AbitVTBot;
+import bot.util.CommandsUtil;
 import com.google.common.io.Resources;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -35,12 +36,10 @@ public class LinksCommand implements Command{
     @Override
     public void execute(Update update) throws TelegramApiException {
 
-        String chatId;
+        String chatId = CommandsUtil.getChatId(update);
 
-        Message message = update.getMessage();
+
         SendMessage sendMessage = new SendMessage();
-        if (message != null) chatId = message.getChatId().toString();
-        else chatId = update.getCallbackQuery().getMessage().getChatId().toString();
         sendMessage.setChatId(chatId);
         sendMessage.setText(getTEXT(chatId));
 
