@@ -33,4 +33,8 @@ public class Log {
         logger.fatal("User {} has {} exception with stacktrace\n{}", CommandsUtil.getChatId(update), e, e.getStackTrace());
     }
 
+    public void databaseConnect(String URL, String PASS, String LOGIN){
+        logger.info("Connecting to database: {}\nlogin:{}\npass:{}", URL, LOGIN, PASS);
+    }
+
 }
