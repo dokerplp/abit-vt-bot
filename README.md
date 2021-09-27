@@ -8,13 +8,13 @@ Used language: ![](https://img.shields.io/github/languages/top/dokerplp/abit-vt-
 
 Current version: ![](https://img.shields.io/badge/version-0.1.1-brightgreen)
 
-Used technologies: TelegramAPI, JDBC, Log4j
+Used technologies: ***TelegramAPI***, ***JDBC***, ***Log4j***
 
-Deployment: Heroku
+Deployment: ***Heroku***
 
-Data Base: Heroku postgresql
+Data Base: ***Heroku postgresql***
 
-Supported languages: Ru, En
+Supported languages: ***Ru***, ***En***
 
 ## Bot link
 
