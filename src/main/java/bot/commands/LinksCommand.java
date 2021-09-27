@@ -15,9 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -48,9 +46,10 @@ public class LinksCommand implements Command{
 
         JSONParser parser = new JSONParser();
 
-        URL file = Resources.getResource("links.json");
+        InputStream in = getClass().getResourceAsStream("/links.json");
         try (
-                Reader reader = new FileReader(file.getFile()))
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        )
         {
             JSONArray links = (JSONArray) parser.parse(reader);
             Iterator<JSONObject> iterator = links.iterator();
