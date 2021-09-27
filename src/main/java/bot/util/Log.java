@@ -18,11 +18,11 @@ public class Log {
     }
 
     public void telegramApiException(TelegramApiException e, Update update){
-        logger.error("User {} has {} TelegramApiException", CommandsUtil.getChatId(update), e);
+        logger.error("User {} has {} TelegramApiException with stacktrace\n{}", CommandsUtil.getChatId(update), e, e.getStackTrace());
     }
 
     public void userException(Exception e, Update update){
-        logger.error("User {} has {} exception", CommandsUtil.getChatId(update), e);
+        logger.error("User {} has {} exception with stacktrace\n{}", CommandsUtil.getChatId(update), e, e.getStackTrace());
     }
 
     public void userException(Exception e){
@@ -30,7 +30,7 @@ public class Log {
     }
 
     public void appError(Exception e, Update update){
-        logger.fatal("User {} has {} exception", CommandsUtil.getChatId(update), e);
+        logger.fatal("User {} has {} exception with stacktrace\n{}", CommandsUtil.getChatId(update), e, e.getStackTrace());
     }
 
 }
