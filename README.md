@@ -14,6 +14,8 @@ Deployment: Heroku
 
 Data Base: Heroku postgresql
 
+Supported languages: Ru, En
+
 ## Bot link
 
 You can test bot on [this link](https://t.me/abit_vt_bot)
