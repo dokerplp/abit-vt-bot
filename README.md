@@ -37,3 +37,6 @@ You can test bot on [this link](https://t.me/abit_vt_bot)
 **/settings** - change bot settings (now you can change language) ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
 **/start** - bot greeting ![](https://img.shields.io/badge/progress-DONE-brightgreen)
+
+**Also**
+You can send voice or text message to bot and get answer))
