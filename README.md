@@ -12,12 +12,26 @@ Used technologies: TelegramAPI, JDBC, Log4j
 
 Deployment: Heroku
 
-Current deployment: 
-
 Data Base: Heroku postgresql
 
 ## Bot link
 
 You can test bot on [this link](https://t.me/abit_vt_bot)
 
-## Bot usage
+## Bot capabilities
+
+**/help** - list of available commands ![](https://img.shields.io/badge/progress-DONE-brightgreen)
+
+**/faq** - get list of common answers ![](https://img.shields.io/badge/progress-NOT%20DONE-red)
+
+**/subjects** - get subjects and their description ![](https://img.shields.io/badge/progress-NOT%20DONE-red)
+
+**/links** - get useful links ![](https://img.shields.io/badge/progress-IN%20PROCESS-yellow)
+
+**/plan** - get syllabus of VT ![](https://img.shields.io/badge/progress-DONE-brightgreen)
+
+**/author** - information about author ![](https://img.shields.io/badge/progress-DONE-brightgreen)
+
+**/settings** - change bot settings (now you can change language) ![](https://img.shields.io/badge/progress-DONE-brightgreen)
+
+**/start** - bot greeting ![](https://img.shields.io/badge/progress-DONE-brightgreen)
