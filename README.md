@@ -11,4 +11,4 @@ Used technologies: TelegramAPI, JDBC, Log4j
 
 ## Bot link
 
-You can test bot on [this link](t.me/abit-vt-bot)
+You can test bot on [this link](https://t.me/abit_vt_bot)
