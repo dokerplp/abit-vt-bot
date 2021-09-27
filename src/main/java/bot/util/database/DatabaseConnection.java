@@ -27,7 +27,7 @@ public class DatabaseConnection {
     public Connection getConnection(){
         try {
             Class.forName("org.postgresql.Driver");
-            String URL = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + NAME;
+            String URL = "jdbc:postgresql://" + HOST + ":" + 5432 + "/" + NAME;
             log.databaseConnect(URL, PASS, USER);
             return DriverManager.getConnection(URL, USER, PASS);
         } catch (ClassNotFoundException | SQLException e) {
