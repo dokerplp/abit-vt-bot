@@ -38,5 +38,6 @@ You can test bot on [this link](https://t.me/abit_vt_bot)
 
 **/start** - bot greeting ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
-**Also**
+#### Also 
+
 You can send voice or text message to bot and get answer))
