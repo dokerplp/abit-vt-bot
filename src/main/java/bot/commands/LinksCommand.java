@@ -2,6 +2,7 @@ package bot.commands;
 
 import bot.run.AbitVTBot;
 import bot.util.CommandsUtil;
+import bot.util.Log;
 import com.google.common.io.Resources;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,6 +22,8 @@ import java.net.URL;
 import java.util.*;
 
 public class LinksCommand implements Command{
+
+    private Log log = new Log();
 
     private String getTEXT(String chatId){
         ResourceBundle otherBundle = ResourceBundle.getBundle("other", bot.getSql().selectLanguage(chatId).getLocale());
@@ -71,7 +74,7 @@ public class LinksCommand implements Command{
             bot.execute(sendMessage);
 
         } catch (IOException | ParseException e) {
-            System.out.println("error");
+            log.userException(e, update);
         }
 
     }
