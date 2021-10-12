@@ -31,10 +31,13 @@ class AbitVTBot : TelegramLongPollingBot() {
         Runtime.getRuntime().addShutdownHook(Thread { log.turnOff() })
     }
 
-    fun main(args: Array<String>) {
-        val bot = AbitVTBot()
-        val telegramBotsApi = TelegramBotsApi(DefaultBotSession::class.java)
-        telegramBotsApi.registerBot(bot)
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            val bot = AbitVTBot()
+            val telegramBotsApi = TelegramBotsApi(DefaultBotSession::class.java)
+            telegramBotsApi.registerBot(bot)
+        }
     }
 
     override fun getBotToken(): String {
@@ -62,9 +65,5 @@ class AbitVTBot : TelegramLongPollingBot() {
 
     fun availableCommands(): LinkedHashMap<String, Command> {
         return invoker.commandMap
-    }
-
-    fun getSql(): SqlFunctions {
-        return sqlFunctions
     }
 }

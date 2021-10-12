@@ -40,4 +40,8 @@ class Log {
     fun databaseConnect(URL: String?, PASS: String?, LOGIN: String?) {
         logger.info("Connecting to database: {}\nlogin:{}\npass:{}", URL, LOGIN, PASS)
     }
+
+    fun databaseConnectionError(URL: String?, PASS: String?, LOGIN: String?) {
+        logger.info("Can't connect to database: {}\nlogin:{}\npass:{}", URL, LOGIN, PASS)
+    }
 }

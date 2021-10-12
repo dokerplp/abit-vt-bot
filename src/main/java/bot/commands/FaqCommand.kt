@@ -6,7 +6,6 @@ import java.util.*
 
 class FaqCommand(private val bot : AbitVTBot) : Command {
     override fun execute(update: Update) {
-        TODO("Not yet implemented")
     }
 
     override fun help(chatId: String): String {
