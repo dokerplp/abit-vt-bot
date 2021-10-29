@@ -18,7 +18,6 @@
         <kotlin.version>1.5.31</kotlin.version>
     </properties>
     <dependencies>
-
         <!-- PostgreSql-->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -33,19 +32,20 @@
             <version>5.3.0</version>
         </dependency>
 
-        <!-- Telegram API -->
-        <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambots</artifactId>
-            <version>5.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambotsextensions</artifactId>
-            <version>5.3.0</version>
-        </dependency>
+<!--        &lt;!&ndash; Telegram API &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.telegram</groupId>-->
+<!--            <artifactId>telegrambots</artifactId>-->
+<!--            <version>5.3.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.telegram</groupId>-->
+<!--            <artifactId>telegrambotsextensions</artifactId>-->
+<!--            <version>5.3.0</version>-->
+<!--        </dependency>-->
 
-        <!-- Spring-->
+<!--        Spring-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -64,6 +64,19 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>2.1.6.RELEASE</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -93,6 +106,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
         </plugins>
     </build>
 

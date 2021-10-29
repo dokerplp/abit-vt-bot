@@ -1,0 +1,20 @@
+#spring.datasource.url= jdbc:postgresql://${HOST}:${PORT}/${NAME}
+#spring.datasource.username= ${USER}
+#spring.datasource.password= ${PASS}
+#
+#bot.name = ${BOT_NAME}
+#bot.token = ${BOT_TOKEN}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${HOST}:${PORT}/${NAME}
+    username: ${USER}
+    password: ${PASS}
+
+bot:
+  name:
+    ${BOT_NAME}
+  pass:
+    ${BOT_PASS}
+
+
