@@ -27,10 +27,10 @@ class Bot(@Autowired val handler: UpdateHandler) : TelegramLongPollingBot() {
     override fun getBotToken(): String = token
 
     override fun onUpdateReceived(update: Update?) {
-        execute(handler.newUpdate(update!!), true)
+        handler.newUpdate(update!!)!!.stream().forEach {run(it)}
     }
 
-    fun execute(msg: PartialBotApiMethod<Message>, trigger: Boolean) {
+    fun run(msg: PartialBotApiMethod<Message>) {
         try {
             when (msg) {
                 is SendSticker -> execute(msg)

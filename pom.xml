@@ -18,6 +18,22 @@
         <kotlin.version>1.5.31</kotlin.version>
     </properties>
     <dependencies>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--DataBase-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>2.5.6</version>
+        </dependency>
+
         <!-- PostgreSql-->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -32,20 +48,7 @@
             <version>5.3.0</version>
         </dependency>
 
-<!--        &lt;!&ndash; Telegram API &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.telegram</groupId>-->
-<!--            <artifactId>telegrambots</artifactId>-->
-<!--            <version>5.3.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.telegram</groupId>-->
-<!--            <artifactId>telegrambotsextensions</artifactId>-->
-<!--            <version>5.3.0</version>-->
-<!--        </dependency>-->
-
 <!--        Spring-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>

@@ -1,5 +1,7 @@
 package bot.controller
 
+import bot.controller.handler.HandleInvoker
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Scope
@@ -12,19 +14,19 @@ import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 
 
-@Component("handler")
-class UpdateHandler {
+@Component
+class UpdateHandler(@Autowired val invoker: HandleInvoker) {
 
-    fun newUpdate(update: Update): PartialBotApiMethod<Message> {
+    fun newUpdate(update: Update): ArrayList<PartialBotApiMethod<Message>>? {
         if (update.hasMessage()){
             val message = update.message
             if (message.hasText()) {
-                val sendMessage = SendMessage()
-                sendMessage.chatId = message.chatId.toString()
-                sendMessage.text = "Welcome to the club buddy!"
-                return sendMessage
+                return invoker.handleText(message, update)
+            }
+            else if (message.hasVoice()){
+                return invoker.handleVoice(message, update)
             }
         }
-       return SendMessage()
+       return null
     }
 }
