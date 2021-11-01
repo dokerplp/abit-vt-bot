@@ -1,20 +1,33 @@
-#spring.datasource.url= jdbc:postgresql://${HOST}:${PORT}/${NAME}
-#spring.datasource.username= ${USER}
-#spring.datasource.password= ${PASS}
-#
-#bot.name = ${BOT_NAME}
-#bot.token = ${BOT_TOKEN}
+# ===============================
+# DATABASE CONNECTION
+# ===============================
+
+# ===============================
+# JPA / HIBERNATE
+# ===============================
 
 spring:
   datasource:
     url: jdbc:postgresql://${HOST}:${PORT}/${NAME}
     username: ${USER}
     password: ${PASS}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+
+# ===============================
+# BOT SETTINGS
+# ===============================
 
 bot:
   name:
     ${BOT_NAME}
   pass:
     ${BOT_PASS}
+
+
 
 

@@ -1,6 +1,7 @@
 package bot.core
 
 import bot.controller.UpdateHandler
+import bot.model.repository.LanguageRepository
 import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -15,8 +16,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException
 
 @Slf4j
 @Component
-class Bot(@Autowired val handler: UpdateHandler) : TelegramLongPollingBot() {
-
+class Bot(@Autowired val handler: UpdateHandler, @Autowired val repository: LanguageRepository) : TelegramLongPollingBot() {
 
     @Value("\${bot.name}")
     private val botName: String = ""
