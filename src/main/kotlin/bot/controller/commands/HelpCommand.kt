@@ -2,6 +2,7 @@ package bot.controller.commands
 
 import bot.model.controller.LanguageController
 import bot.model.entity.LanguageEntity
+import bot.utli.sendMessage
 import jdk.nashorn.internal.objects.annotations.Getter
 import lombok.Setter
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,9 +23,8 @@ class HelpCommand : Command {
 
         val list: ArrayList<PartialBotApiMethod<Message>> = ArrayList()
 
-        val msg: SendMessage = SendMessage()
-        msg.chatId = update.message.chatId.toString()
-        msg.text = languageController!!.getById(update.message.chatId.toInt()).language
+        val msg = sendMessage(update)
+        msg.text = languageController!!.getById(update.message.chatId.toInt()).language.lan
 
         list.add(msg)
 

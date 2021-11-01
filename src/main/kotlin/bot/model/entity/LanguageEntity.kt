@@ -10,15 +10,15 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "settings")
-class LanguageEntity() {
+class LanguageEntity {
 
     @Id
     @Column(name = "id")
     var id: Int = 0
-        private set
 
     @Column(name = "language")
-    var language: String = "EN"
-        private set
+    @Enumerated(EnumType.STRING)
+    var language: Language = Language.EN
+
 }
 
