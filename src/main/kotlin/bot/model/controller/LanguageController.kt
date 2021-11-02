@@ -1,16 +1,19 @@
 package bot.model.controller
 
 import bot.model.entity.LanguageEntity
-import bot.model.service.DefaultLanguageService
+import bot.model.repository.LanguageRepository
+import bot.model.service.LanguageService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import javax.annotation.Resource
 
 @Component
-class LanguageController(@Resource(name = "languageService") val service: DefaultLanguageService) {
-    fun getById(id: Long): LanguageEntity {
-        return service.getById(id)
+class LanguageController(@Autowired val repository: LanguageRepository) : LanguageService {
+    override fun getById(id: Long): LanguageEntity {
+        return repository.getById(id)
     }
-    fun save(entity: LanguageEntity){
-        service.save(entity)
+
+    override fun save(entity: LanguageEntity) {
+        return repository.save(entity)
     }
+
 }

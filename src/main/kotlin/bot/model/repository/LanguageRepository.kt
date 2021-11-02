@@ -1,6 +1,7 @@
 package bot.model.repository
 
 import bot.model.entity.LanguageEntity
+import bot.model.service.LanguageService
 import bot.utli.enums.Language
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.CrudRepository
@@ -11,7 +12,4 @@ import java.util.*
 
 @Repository
 @Transactional(readOnly = true)
-interface LanguageRepository : CrudRepository<LanguageEntity, Int>{
-    fun getById(id: Long): LanguageEntity
-    fun save(entity: LanguageEntity)
-}
+interface LanguageRepository : CrudRepository<LanguageEntity, Int>, LanguageService
