@@ -17,7 +17,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException
 
 @Slf4j
 @Component
-class Bot(@Autowired val handler: UpdateHandler, @Autowired val repository: LanguageRepository) : TelegramLongPollingBot() {
+class Bot(@Autowired val handler: UpdateHandler) : TelegramLongPollingBot() {
 
     @Value("\${bot.name}")
     private val botName: String = ""
@@ -28,7 +28,7 @@ class Bot(@Autowired val handler: UpdateHandler, @Autowired val repository: Lang
     override fun getBotToken(): String = token
 
     override fun onUpdateReceived(update: Update?) {
-        handler.newUpdate(update!!)!!.stream().forEach {run(it)}
+        handler.newUpdate(update!!)!!.forEach { run(it) }
     }
 
     fun run(msg: PartialBotApiMethod<Message>) {

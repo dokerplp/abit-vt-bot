@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component("/subjects")
 class SubjectsCommand : Command {
-    override fun execute(update: Update): ArrayList<PartialBotApiMethod<Message>>? {
+    override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
         TODO("Not yet implemented")
     }
 

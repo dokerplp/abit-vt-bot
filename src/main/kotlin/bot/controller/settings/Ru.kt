@@ -1,33 +1,24 @@
-package bot.controller.commands
+package bot.controller.settings
 
 import bot.model.controller.LanguageController
 import bot.model.entity.LanguageEntity
+import bot.utli.enums.Language
 import bot.utli.getChatId
 import bot.utli.sendMessage
-import jdk.nashorn.internal.objects.annotations.Getter
-import lombok.Setter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 
-@Component("/help")
-class HelpCommand : Command {
-
-
+@Component
+class Ru(@Autowired val languageController: LanguageController) : Setting {
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
-
-        TODO()
-    }
-
-
-    override fun help(chatId: String): String {
-        return ""
-    }
-
-    override fun name(): String {
-        return "/help"
+        val chatId = getChatId(update)
+        val msg = sendMessage(update)
+        msg.chatId = chatId.toString()
+        msg.text = "Язык был сменен на русский"
+        languageController.save(LanguageEntity(chatId, Language.RU))
+        return arrayOf(msg)
     }
 }

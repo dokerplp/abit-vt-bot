@@ -7,7 +7,10 @@ import javax.annotation.Resource
 
 @Component
 class LanguageController(@Resource(name = "languageService") val service: DefaultLanguageService) {
-    fun getById(id: Int): LanguageEntity {
+    fun getById(id: Long): LanguageEntity {
         return service.getById(id)
+    }
+    fun save(entity: LanguageEntity){
+        service.save(entity)
     }
 }

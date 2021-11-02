@@ -17,7 +17,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 @Component
 class UpdateHandler(@Autowired val invoker: HandleInvoker) {
 
-    fun newUpdate(update: Update): ArrayList<PartialBotApiMethod<Message>>? {
+    fun newUpdate(update: Update): Array<PartialBotApiMethod<Message>>? {
         if (update.hasMessage()){
             val message = update.message
             if (message.hasText()) {

@@ -1,6 +1,7 @@
 package bot.controller.handler
 
 import bot.controller.commands.CommandInvoker
+import bot.controller.settings.SettingInvoker
 import bot.utli.enums.Stickers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -12,26 +13,20 @@ import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component("textHandler")
-class TextHandler(@Autowired val commandInvoker: CommandInvoker) : Handler {
-    override fun handle(msg: Message, update: Update): ArrayList<PartialBotApiMethod<Message>>? {
-
-        var list: ArrayList<PartialBotApiMethod<Message>>? = null
+class TextHandler(@Autowired val commandInvoker: CommandInvoker, @Autowired val settingInvoker: SettingInvoker) : Handler {
+    override fun handle(msg: Message, update: Update): Array<PartialBotApiMethod<Message>>? {
 
         val text = msg.text.split(" ".toRegex()).toTypedArray()[0]
-        list =
-            if (text.startsWith("/"))
-                commandInvoker.execute(text, update)
-            else if (text.startsWith("⚙️"))
-                TODO("return settings")
-            else
-                default(text, update)
 
-        return list
+        return if (text.startsWith("/"))
+            commandInvoker.execute(text, update)
+        else if (text.startsWith("⚙️"))
+            settingInvoker.execute(text, update)
+        else
+            default(text, update)
     }
 
-    private fun default(text: String, update: Update): ArrayList<PartialBotApiMethod<Message>>{
-
-        val list: ArrayList<PartialBotApiMethod<Message>> = ArrayList()
+    private fun default(text: String, update: Update): Array<PartialBotApiMethod<Message>>{
 
         val chatId = update.message.chatId.toString()
         val sticker = SendSticker()
@@ -41,10 +36,7 @@ class TextHandler(@Autowired val commandInvoker: CommandInvoker) : Handler {
         message.chatId = chatId
         message.text = "I don't know answer on question:\n\"$text\""
 
-        list.add(message)
-        list.add(sticker)
-
-        return list
+        return arrayOf(message, sticker)
     }
 
 }

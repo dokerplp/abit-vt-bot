@@ -8,7 +8,11 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service("languageService")
 class DefaultLanguageService(@Autowired val repository: LanguageRepository) : LanguageService{
-    override fun getById(id: Int): LanguageEntity {
+    override fun getById(id: Long): LanguageEntity {
         return repository.getById(id)
+    }
+
+    override fun save(entity: LanguageEntity) {
+        return repository.save(entity)
     }
 }

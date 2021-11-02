@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component("voiceHandler")
 class VoiceHandler : Handler {
-    override fun handle(msg: Message, update: Update): ArrayList<PartialBotApiMethod<Message>>? {
+    override fun handle(msg: Message, update: Update): Array<PartialBotApiMethod<Message>>? {
         TODO("Not yet implemented")
     }
 

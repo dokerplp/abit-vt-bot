@@ -11,6 +11,7 @@ import java.util.*
 
 @Repository
 @Transactional(readOnly = true)
-interface LanguageRepository : JpaRepository<LanguageEntity, Int>{
-    override fun getById(id: Int): LanguageEntity
+interface LanguageRepository : CrudRepository<LanguageEntity, Int>{
+    fun getById(id: Long): LanguageEntity
+    fun save(entity: LanguageEntity)
 }
