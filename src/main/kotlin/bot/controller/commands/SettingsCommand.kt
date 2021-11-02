@@ -1,6 +1,9 @@
 package bot.controller.commands
 
+import bot.utli.ResourceOperator
+import bot.utli.getChatId
 import bot.utli.sendMessage
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod
 import org.telegram.telegrambots.meta.api.objects.Message
@@ -11,16 +14,20 @@ import java.util.ArrayList
 
 @Component("/settings")
 class SettingsCommand : Command{
+
+    @Autowired
+    val resourceOperator: ResourceOperator? = null
+
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
         val msg = sendMessage(update)
-        msg.text = "settings"
+        msg.text = resourceOperator!!.getText("settings.text", getChatId(update))!!
 
         val keyboardMarkup = ReplyKeyboardMarkup()
         val keyboard: MutableList<KeyboardRow> = ArrayList()
         val row = KeyboardRow()
 
         keyboardMarkup.resizeKeyboard = true
-        row.add("settings")
+        row.add(resourceOperator!!.getText("settings.settings", getChatId(update))!!)
 
         keyboard.add(row)
         keyboardMarkup.keyboard = keyboard
@@ -31,7 +38,7 @@ class SettingsCommand : Command{
 
 
     override fun help(update: Update): String {
-        return "settings"
+        return resourceOperator!!.getHelp("settings", getChatId(update))!!
     }
 
     override fun name(): String {

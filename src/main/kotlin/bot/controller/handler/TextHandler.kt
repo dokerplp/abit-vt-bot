@@ -3,6 +3,7 @@ package bot.controller.handler
 import bot.controller.commands.CommandInvoker
 import bot.controller.settings.SettingInvoker
 import bot.utli.enums.Stickers
+import bot.utli.sendMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod

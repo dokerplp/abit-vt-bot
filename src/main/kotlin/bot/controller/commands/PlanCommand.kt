@@ -1,6 +1,10 @@
 package bot.controller.commands
 
+import bot.utli.ResourceOperator
+import bot.utli.enums.Links
+import bot.utli.getChatId
 import bot.utli.sendDocument
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument
@@ -13,11 +17,15 @@ import java.util.ArrayList
 
 @Component("/plan")
 class PlanCommand: Command{
+
+    @Autowired
+    val resourceOperator: ResourceOperator? = null
+
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
 
         val sdm = sendDocument(update)
         val plan1 = InputFile()
-        plan1.setMedia("https://eduold-prod.itmo.dev/file/subspec/4285/09.03.01_kompyuternye_sistemy_i_tehnologii_14549.pdf")
+        plan1.setMedia(Links.PLAN_IVT.toString())
         sdm.document = plan1
 
         sdm.allowSendingWithoutReply = true
@@ -25,12 +33,12 @@ class PlanCommand: Command{
         val sdm2 = sendDocument(update)
         val plan2 = InputFile()
         sdm2.document = plan2
-        plan2.setMedia("https://eduold-prod.itmo.dev/file/subspec/4290/09.03.04_44.03.04_kompyuternye_tehnologii_v_dizayne_14546_14547.pdf")
+        plan2.setMedia(Links.PLAN_SPPO.toString())
 
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
         val button = InlineKeyboardButton()
-        button.text = "plan"
-        button.url = "https://docs.google.com/spreadsheets/d/1NlrnPsPksHXzEHFnSHtUtbJg5AENXx6pVFBevHIg-4k/edit#gid=1824976275"
+        button.text = resourceOperator!!.getText("plan.text", getChatId(update))!!
+        button.url = Links.PLAN_CUSTOM.toString()
 
         val bl: MutableList<InlineKeyboardButton> = ArrayList()
         bl.add(button)
@@ -45,7 +53,7 @@ class PlanCommand: Command{
 
 
     override fun help(update: Update): String {
-        return "plan"
+        return resourceOperator!!.getHelp("plan", getChatId(update))!!
     }
 
     override fun name(): String {

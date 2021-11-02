@@ -1,5 +1,7 @@
 package bot.controller.commands
 
+import bot.utli.ResourceOperator
+import bot.utli.getChatId
 import bot.utli.sendMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
@@ -15,13 +17,15 @@ import java.util.ArrayList
 @Component("/help")
 class HelpCommand(@Autowired final val context: ApplicationContext) : Command {
 
+    @Autowired
+    val resourceOperator: ResourceOperator? = null
     private var map: Map<String, Command> = context.getBeansOfType(Command::class.java)
 
 
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
 
         val sendMessage = sendMessage(update)
-        sendMessage.text = help(update)
+        sendMessage.text = resourceOperator!!.getText("help.text", getChatId(update))!!
 
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
 
@@ -43,7 +47,7 @@ class HelpCommand(@Autowired final val context: ApplicationContext) : Command {
 
 
     override fun help(update: Update): String {
-        return "help"
+        return resourceOperator!!.getHelp("help", getChatId(update))!!
     }
 
     override fun name(): String {
