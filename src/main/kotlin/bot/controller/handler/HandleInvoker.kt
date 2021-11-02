@@ -15,6 +15,10 @@ class HandleInvoker(@Autowired val context: ApplicationContext) {
         return map["textHandler"]?.handle(msg,update)
     }
 
+    fun handleCallBack(text: String, update: Update) : Array<PartialBotApiMethod<Message>>? {
+        return (map["textHandler"] as TextHandler).handle(text, update)
+    }
+
     fun handleVoice(msg: Message, update: Update) : Array<PartialBotApiMethod<Message>>? {
         return map["voiceHandler"]?.handle(msg, update)
     }

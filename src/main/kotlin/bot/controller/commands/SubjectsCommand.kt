@@ -12,8 +12,8 @@ class SubjectsCommand : Command {
     }
 
 
-    override fun help(chatId: String): String {
-        return ""
+    override fun help(update: Update): String {
+        return "subjects"
     }
 
     override fun name(): String {

@@ -6,6 +6,6 @@ import org.telegram.telegrambots.meta.api.objects.Update
 
 interface Command {
     fun execute(update: Update): Array<PartialBotApiMethod<Message>>?
-    fun help(chatId: String): String
+    fun help(update: Update): String
     fun name(): String
 }

@@ -11,8 +11,8 @@ class FaqCommand : Command {
         TODO("Not yet implemented")
     }
 
-    override fun help(chatId: String): String {
-        return ""
+    override fun help(update: Update): String {
+        return "faq"
     }
 
     override fun name(): String {

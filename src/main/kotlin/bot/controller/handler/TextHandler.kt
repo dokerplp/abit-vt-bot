@@ -15,9 +15,11 @@ import org.telegram.telegrambots.meta.api.objects.Update
 @Component("textHandler")
 class TextHandler(@Autowired val commandInvoker: CommandInvoker, @Autowired val settingInvoker: SettingInvoker) : Handler {
     override fun handle(msg: Message, update: Update): Array<PartialBotApiMethod<Message>>? {
-
         val text = msg.text.split(" ".toRegex()).toTypedArray()[0]
+        return handle(text, update)
+    }
 
+    fun handle(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
         return if (text.startsWith("/"))
             commandInvoker.execute(text, update)
         else if (text.startsWith("⚙️"))

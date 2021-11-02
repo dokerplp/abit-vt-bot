@@ -13,8 +13,8 @@ class LinksCommand : Command {
     }
 
 
-    override fun help(chatId: String): String {
-        return ""
+    override fun help(update: Update): String {
+        return "link"
     }
 
     override fun name(): String {
