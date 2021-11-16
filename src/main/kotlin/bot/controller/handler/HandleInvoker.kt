@@ -1,5 +1,7 @@
 package bot.controller.handler
 
+import bot.core.Bot
+import bot.utli.sendMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Component
@@ -16,7 +18,7 @@ class HandleInvoker(@Autowired val context: ApplicationContext) {
     }
 
     fun handleCallBack(text: String, update: Update) : Array<PartialBotApiMethod<Message>>? {
-        return (map["textHandler"] as TextHandler).handle(text, update)
+        return (map["textHandler"] as TextHandler).callBackHandle(text, update)
     }
 
     fun handleVoice(msg: Message, update: Update) : Array<PartialBotApiMethod<Message>>? {

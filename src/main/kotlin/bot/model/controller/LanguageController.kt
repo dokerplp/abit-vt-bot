@@ -8,12 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class LanguageController(@Autowired val repository: LanguageRepository) : LanguageService {
-    override fun getById(id: Long): LanguageEntity {
-        return repository.getById(id)
-    }
+    override fun getById(id: Long): LanguageEntity = repository.getById(id)
 
-    override fun save(entity: LanguageEntity) {
-        return repository.save(entity)
-    }
-
+    override fun save(entity: LanguageEntity) = repository.save(entity)
 }

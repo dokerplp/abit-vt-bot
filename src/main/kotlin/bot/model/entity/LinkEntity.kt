@@ -1,13 +1,10 @@
 package bot.model.entity
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "links")
-class LinkEntity {
+class LinkEntity() {
     @Id
     @Column(name = "id")
     var id: Long = 0
@@ -17,4 +14,9 @@ class LinkEntity {
 
     @Column(name = "value")
     var value: String = ""
+
+    @ManyToOne
+    @MapsId
+    @JoinColumn(name = "faq_id")
+    var faq: FaqEntity? = null
 }

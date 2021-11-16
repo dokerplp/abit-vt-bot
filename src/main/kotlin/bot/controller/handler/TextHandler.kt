@@ -17,7 +17,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 class TextHandler(@Autowired val commandInvoker: CommandInvoker, @Autowired val settingInvoker: SettingInvoker) : Handler {
     override fun handle(msg: Message, update: Update): Array<PartialBotApiMethod<Message>>? {
         val text = msg.text.split(" ".toRegex()).toTypedArray()[0]
-        return handle(text, update)
+        return textHandle(text, update)
     }
 
     fun handle(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
@@ -26,7 +26,17 @@ class TextHandler(@Autowired val commandInvoker: CommandInvoker, @Autowired val 
         else if (text.startsWith("⚙️"))
             settingInvoker.execute(text, update)
         else
-            default(text, update)
+            return null
+    }
+
+    fun textHandle(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
+        return handle(text, update) ?: default(text, update);
+    }
+
+    fun callBackHandle(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
+        val msg = sendMessage(update)
+        msg.text = text
+        return handle(text, update) ?: arrayOf(msg)
     }
 
     private fun default(text: String, update: Update): Array<PartialBotApiMethod<Message>>{
