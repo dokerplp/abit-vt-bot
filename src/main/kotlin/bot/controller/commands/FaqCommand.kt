@@ -3,6 +3,7 @@ package bot.controller.commands
 import bot.model.controller.FaqController
 import bot.model.controller.LanguageController
 import bot.utli.ResourceOperator
+import bot.utli.enums.Language
 import bot.utli.getChatId
 import bot.utli.sendMessage
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,23 +16,29 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList
 
 @Component("/faq")
-class FaqCommand(@Autowired val languageController: LanguageController) : Command {
-
-    @Autowired
-    val resourceOperator: ResourceOperator? = null
-
-    @Autowired
-    val faqController: FaqController? = null
+class FaqCommand(
+    @Autowired val languageController: LanguageController,
+    @Autowired val resourceOperator: ResourceOperator,
+    @Autowired val faqController: FaqController
+    ) : Command {
 
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
         val msg = sendMessage(update)
-        msg.text = resourceOperator!!.getText("faq.text", getChatId(update))!!
+        msg.text = resourceOperator.getText("faq.text", getChatId(update))!!
+
+        val language: Language = languageController.getById(getChatId(update)).language;
 
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
-        for (faq in faqController!!.findAll()){
+        for (faq in faqController.findAll()){
             val button = InlineKeyboardButton()
-            button.text = faq.question.ru
-            button.callbackData = faq.answer.ru
+            if (language == Language.RU) {
+                button.text = faq.question.ru
+                button.callbackData = faq.answer.ru
+            }
+            else if (language == Language.EN) {
+                button.text = faq.question.en
+                button.callbackData = faq.answer.en
+            }
             val bl: MutableList<InlineKeyboardButton> = ArrayList()
             bl.add(button)
             buttons.add(bl)

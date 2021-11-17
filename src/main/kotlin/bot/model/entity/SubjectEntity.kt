@@ -1,27 +1,24 @@
 package bot.model.entity
 
-
 import javax.persistence.*
 
 @Entity
-@Table(name = "faq")
-class FaqEntity() {
+@Table(name = "subjects")
+class SubjectEntity {
 
     @Id
-    @Column(name = "id")
     var id: Long = 0
 
     @OneToOne
     @PrimaryKeyJoinColumn
-    lateinit var question: QuestionEntity
+    lateinit var name: SubjectNameEntity
 
     @OneToOne
     @PrimaryKeyJoinColumn
-    lateinit var answer: AnswerEntity
+    lateinit var description: SubjectDescriptionEntity
 
     @OneToMany
     @PrimaryKeyJoinColumn
-    lateinit var links: List<FaqLinkEntity>
-
+    lateinit var links: List<SubjectLinkEntity>
 
 }
