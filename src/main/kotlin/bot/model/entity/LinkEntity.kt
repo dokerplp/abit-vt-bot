@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "links")
-open class LinkEntity() {
+class LinkEntity() {
     @Id
     @Column(name = "id")
     var id: Long = 0
@@ -15,24 +15,10 @@ open class LinkEntity() {
     @Column(name = "value")
     var value: String = ""
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    lateinit var subject: SubjectLinkEntity
+    @ManyToOne
+    @MapsId
+    @JoinColumn(name = "faq_id")
+    var faq: FaqEntity? = null
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    lateinit var faq: FaqLinkEntity
-
-    constructor(text: String) : this(){
-        this.text = text
-    }
-
-    constructor(subject: SubjectLinkEntity, text: String) : this(text) {
-        this.subject = subject
-    }
-
-    constructor(faq: FaqLinkEntity, text: String) : this(text) {
-        this.faq = faq
-    }
 
 }

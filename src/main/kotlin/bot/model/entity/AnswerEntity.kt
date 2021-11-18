@@ -21,4 +21,5 @@ class AnswerEntity() {
     @MapsId
     @JoinColumn(name = "faq_id")
     lateinit var faq: FaqEntity
+
 }
