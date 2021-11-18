@@ -10,23 +10,19 @@ import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component("/author")
-class AuthorCommand : Command {
-
-    @Autowired
-    val resourceOperator: ResourceOperator? = null
+class AuthorCommand(
+    @Autowired val resourceOperator: ResourceOperator
+) : Command {
 
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
-
         val msg = sendMessage(update)
         msg.enableMarkdown(true)
-        msg.text = resourceOperator!!.getText("author.greeting", getChatId(update))!!
-
+        msg.text = resourceOperator.getText("author.greeting", getChatId(update))!!
         return arrayOf(msg)
     }
 
-
     override fun help(update: Update): String {
-        return resourceOperator!!.getHelp("author", getChatId(update))!!
+        return resourceOperator.getHelp("author", getChatId(update))!!
     }
 
     override fun name(): String {

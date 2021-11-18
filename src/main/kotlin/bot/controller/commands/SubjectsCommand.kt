@@ -9,10 +9,9 @@ import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component("/subjects")
-class SubjectsCommand : Command {
-
-    @Autowired
-    val resourceOperator: ResourceOperator? = null
+class SubjectsCommand(
+    @Autowired val resourceOperator: ResourceOperator
+) : Command {
 
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
         TODO("Not yet implemented")
@@ -20,7 +19,7 @@ class SubjectsCommand : Command {
 
 
     override fun help(update: Update): String {
-        return resourceOperator!!.getHelp("subjects", getChatId(update))!!
+        return resourceOperator.getHelp("subjects", getChatId(update))!!
     }
 
     override fun name(): String {

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class FaqController(@Autowired val repository: FaqRepository): FaqService {
+class FaqController(
+    @Autowired val repository: FaqRepository
+) : FaqService {
     override fun findAll(): MutableIterable<FaqEntity> = repository.findAll()
     override fun save(entity: FaqEntity) {
         repository.save(entity)

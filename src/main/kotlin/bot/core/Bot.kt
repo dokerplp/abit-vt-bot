@@ -15,7 +15,9 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException
 
 @Slf4j
 @Component
-class Bot(@Autowired val handler: UpdateHandler) : TelegramLongPollingBot() {
+class Bot(
+    @Autowired val handler: UpdateHandler
+) : TelegramLongPollingBot() {
 
     @Value("\${bot.name}")
     private val botName: String = ""

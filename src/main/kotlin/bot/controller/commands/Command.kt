@@ -8,5 +8,4 @@ interface Command {
     fun execute(update: Update): Array<PartialBotApiMethod<Message>>?
     fun help(update: Update): String
     fun name(): String
-
 }

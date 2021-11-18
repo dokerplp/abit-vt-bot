@@ -7,22 +7,18 @@ import bot.utli.sendDocument
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod
-import org.telegram.telegrambots.meta.api.methods.send.SendDocument
 import org.telegram.telegrambots.meta.api.objects.InputFile
 import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
-import java.util.ArrayList
 
 @Component("/plan")
-class PlanCommand: Command{
-
-    @Autowired
-    val resourceOperator: ResourceOperator? = null
+class PlanCommand(
+    @Autowired val resourceOperator: ResourceOperator
+) : Command {
 
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
-
         val sdm = sendDocument(update)
         val plan1 = InputFile()
         plan1.setMedia(Links.PLAN_IVT.toString())
@@ -37,7 +33,7 @@ class PlanCommand: Command{
 
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
         val button = InlineKeyboardButton()
-        button.text = resourceOperator!!.getText("plan.text", getChatId(update))!!
+        button.text = resourceOperator.getText("plan.text", getChatId(update))!!
         button.url = Links.PLAN_CUSTOM.toString()
 
         val bl: MutableList<InlineKeyboardButton> = ArrayList()
@@ -53,7 +49,7 @@ class PlanCommand: Command{
 
 
     override fun help(update: Update): String {
-        return resourceOperator!!.getHelp("plan", getChatId(update))!!
+        return resourceOperator.getHelp("plan", getChatId(update))!!
     }
 
     override fun name(): String {

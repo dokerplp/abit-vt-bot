@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class LanguageController(@Autowired val repository: LanguageRepository) : LanguageService {
-    override fun getById(id: Long): LanguageEntity = repository.getById(id)
+class LanguageController(
+    @Autowired val repository: LanguageRepository
+) : LanguageService {
 
+    override fun getById(id: Long): LanguageEntity = repository.getById(id)
     override fun save(entity: LanguageEntity) = repository.save(entity)
 }

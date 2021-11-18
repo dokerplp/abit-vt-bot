@@ -6,7 +6,10 @@ import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-class ResourceOperator(@Autowired val languageController: LanguageController) {
+class ResourceOperator(
+    @Autowired val languageController: LanguageController
+) {
+
     fun getText(key: String, chatId: Long): String? {
         val otherBundle: ResourceBundle =
             ResourceBundle.getBundle("other", languageController.getById(chatId).language.locale)

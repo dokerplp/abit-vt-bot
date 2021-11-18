@@ -11,24 +11,20 @@ import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
-import java.util.ArrayList
 
 @Component("/links")
-class LinksCommand : Command {
+class LinksCommand(
+    @Autowired val resourceOperator: ResourceOperator,
+    @Autowired val linkController: LinkController
+) : Command {
 
-    @Autowired
-    val resourceOperator: ResourceOperator? = null
-
-    @Autowired
-    val linkController: LinkController? = null
 
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
-
         val msg = sendMessage(update)
-        msg.text = resourceOperator!!.getText("links.text", getChatId(update))!!
+        msg.text = resourceOperator.getText("links.text", getChatId(update))!!
 
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
-        for (link in linkController!!.findAll()){
+        for (link in linkController.findAll()) {
             val button = InlineKeyboardButton()
             button.text = link.text
             button.url = link.value
@@ -44,7 +40,7 @@ class LinksCommand : Command {
 
 
     override fun help(update: Update): String {
-        return resourceOperator!!.getHelp("links", getChatId(update))!!
+        return resourceOperator.getHelp("links", getChatId(update))!!
     }
 
     override fun name(): String {

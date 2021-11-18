@@ -21,7 +21,7 @@ class FaqEntity() {
 
     @OneToMany
     @PrimaryKeyJoinColumn
-    lateinit var links: List<LinkEntity>
+    var links: List<LinkEntity>? = null
 
 
 }

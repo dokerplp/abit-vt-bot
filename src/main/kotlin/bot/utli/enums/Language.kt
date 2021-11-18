@@ -9,9 +9,7 @@ enum class Language(val locale: Locale, val value: String){
     RU(Locale("ru", "RU"), "RU"),
     EN(Locale.US, "EN");
 
-    override fun toString(): String {
-        return value
-    }
+    override fun toString(): String = value
 }
 
 

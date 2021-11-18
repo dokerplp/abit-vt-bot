@@ -12,7 +12,10 @@ import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component("ru")
-class Ru(@Autowired val languageController: LanguageController) : Setting {
+class Ru(
+    @Autowired val languageController: LanguageController
+) : Setting {
+
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
         val chatId = getChatId(update)
         val msg = sendMessage(update)

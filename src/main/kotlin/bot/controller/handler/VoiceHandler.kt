@@ -10,5 +10,4 @@ class VoiceHandler : Handler {
     override fun handle(msg: Message, update: Update): Array<PartialBotApiMethod<Message>>? {
         TODO("Not yet implemented")
     }
-
 }

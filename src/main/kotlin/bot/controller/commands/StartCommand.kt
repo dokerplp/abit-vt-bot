@@ -2,7 +2,6 @@ package bot.controller.commands
 
 import bot.utli.ResourceOperator
 import bot.utli.enums.Stickers
-import bot.utli.getChatId
 import bot.utli.sendMessage
 import bot.utli.sendSticker
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,10 +12,9 @@ import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component("/start")
-class StartCommand : Command {
-
-    @Autowired
-    val resourceOperator: ResourceOperator? = null
+class StartCommand(
+    @Autowired val resourceOperator: ResourceOperator
+) : Command {
 
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
 
@@ -28,7 +26,6 @@ class StartCommand : Command {
 
         return arrayOf(msg, stc)
     }
-
 
     override fun help(update: Update): String {
         return "/start - welcome to the club buddy..."
