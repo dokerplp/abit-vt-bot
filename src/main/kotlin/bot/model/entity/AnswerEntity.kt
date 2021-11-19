@@ -9,6 +9,7 @@ class AnswerEntity() {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
     @Column(name = "ru")

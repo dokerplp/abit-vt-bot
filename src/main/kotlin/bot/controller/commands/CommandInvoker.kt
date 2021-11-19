@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 
 @Component
 class CommandInvoker(
-    @Autowired val context: ApplicationContext,
+    @Autowired final val context: ApplicationContext,
     @Autowired val resourceOperator: ResourceOperator
 ) {
 

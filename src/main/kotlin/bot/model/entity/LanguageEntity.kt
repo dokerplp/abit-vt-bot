@@ -10,6 +10,7 @@ class LanguageEntity() {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
     @Column(name = "language")

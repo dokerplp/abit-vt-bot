@@ -9,6 +9,7 @@ class FaqEntity() {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
     @OneToOne
@@ -19,8 +20,11 @@ class FaqEntity() {
     @PrimaryKeyJoinColumn
     lateinit var answer: AnswerEntity
 
-    @OneToMany
-    @PrimaryKeyJoinColumn
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "faq_links",
+        joinColumns = [JoinColumn(name = "faq_id")],
+        inverseJoinColumns = [JoinColumn(name = "link_id")]
+    )
     var links: List<LinkEntity>? = null
 
 

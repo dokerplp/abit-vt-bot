@@ -28,7 +28,7 @@ class FaqCommand(
         for (faq in faqController.findAll()) {
             val button = InlineKeyboardButton()
             button.text = faq.question.ru
-            button.callbackData = faq.answer.ru
+            button.callbackData = "link:" + faq.id
             val bl: MutableList<InlineKeyboardButton> = ArrayList()
             bl.add(button)
             buttons.add(bl)
@@ -38,8 +38,6 @@ class FaqCommand(
 
         return arrayOf(msg)
     }
-
-    //TODO("if findall is empty exception throws")
 
     override fun help(update: Update): String {
         return resourceOperator.getHelp("faq", getChatId(update))!!

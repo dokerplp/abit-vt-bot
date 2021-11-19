@@ -7,6 +7,7 @@ import javax.persistence.*
 class LinkEntity() {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
     @Column(name = "text")
@@ -14,11 +15,6 @@ class LinkEntity() {
 
     @Column(name = "value")
     var value: String = ""
-
-    @ManyToOne
-    @MapsId
-    @JoinColumn(name = "faq_id")
-    var faq: FaqEntity? = null
 
 
 }

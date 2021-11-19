@@ -16,10 +16,12 @@ import org.telegram.telegrambots.meta.api.objects.Update
 @Component("textHandler")
 class TextHandler(
     @Autowired val commandInvoker: CommandInvoker,
-    @Autowired val settingInvoker: SettingInvoker
+    @Autowired val settingInvoker: SettingInvoker,
+    @Autowired val requestAnalyzer: RequestAnalyzer
 ) : Handler {
 
-    override fun handle(msg: Message, update: Update): Array<PartialBotApiMethod<Message>>? {
+    override fun handle(update: Update): Array<PartialBotApiMethod<Message>>? {
+        val msg = update.message
         val text = msg.text.split(" ".toRegex()).toTypedArray()[0]
         return textHandle(text, update)
     }
@@ -34,13 +36,7 @@ class TextHandler(
     }
 
     fun textHandle(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
-        return handle(text, update) ?: default(text, update);
-    }
-
-    fun callBackHandle(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
-        val msg = sendMessage(update)
-        msg.text = text
-        return handle(text, update) ?: arrayOf(msg)
+        return handle(text, update) ?: requestAnalyzer.analyze(text, update) ?: default(text, update)
     }
 
     private fun default(text: String, update: Update): Array<PartialBotApiMethod<Message>>{

@@ -11,7 +11,6 @@ class FaqController(
     @Autowired val repository: FaqRepository
 ) : FaqService {
     override fun findAll(): MutableIterable<FaqEntity> = repository.findAll()
-    override fun save(entity: FaqEntity) {
-        repository.save(entity)
-    }
+    override fun save(entity: FaqEntity) = repository.save(entity)
+    override fun getById(id: Long): FaqEntity = repository.getById(id)
 }

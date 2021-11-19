@@ -18,6 +18,7 @@ spring:
       ddl-auto: update
     generate-ddl: true
 
+
 # ===============================
 # BOT SETTINGS
 # ===============================

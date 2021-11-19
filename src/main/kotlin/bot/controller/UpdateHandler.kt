@@ -17,13 +17,13 @@ class UpdateHandler(
         if (update.hasMessage()) {
             val message = update.message
             if (message.hasText()) {
-                return invoker.handleText(message, update)
+                return invoker.handleText(update)
             } else if (message.hasVoice()) {
-                return invoker.handleVoice(message, update)
+                return invoker.handleVoice(update)
             }
         } else if (update.hasCallbackQuery()) {
             val text = update.callbackQuery.data
-            return invoker.handleCallBack(text, update)
+            return invoker.handleCallBack(update)
         }
        return null
     }
