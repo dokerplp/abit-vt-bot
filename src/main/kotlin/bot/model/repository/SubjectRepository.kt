@@ -1,13 +1,11 @@
 package bot.model.repository
 
-import bot.model.entity.LanguageEntity
-import bot.model.entity.LinkEntity
-import bot.model.service.LanguageService
-import bot.model.service.LinkService
+import bot.model.entity.SubjectEntity
+import bot.model.service.SubjectService
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
 @Repository
 @Transactional(readOnly = true)
-interface LinkRepository : CrudRepository<LinkEntity, Int>, LinkService
+interface SubjectRepository : CrudRepository<SubjectEntity, Long>, SubjectService

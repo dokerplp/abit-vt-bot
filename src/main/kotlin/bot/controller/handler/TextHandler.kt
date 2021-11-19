@@ -21,8 +21,7 @@ class TextHandler(
 ) : Handler {
 
     override fun handle(update: Update): Array<PartialBotApiMethod<Message>>? {
-        val msg = update.message
-        val text = msg.text.split(" ".toRegex()).toTypedArray()[0]
+        val text = update.message.text
         return textHandle(text, update)
     }
 
@@ -36,7 +35,7 @@ class TextHandler(
     }
 
     fun textHandle(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
-        return handle(text, update) ?: requestAnalyzer.analyze(text, update) ?: default(text, update)
+        return handle(text.split(" ".toRegex()).toTypedArray()[0], update) ?: requestAnalyzer.analyze(text, update) ?: default(text, update)
     }
 
     private fun default(text: String, update: Update): Array<PartialBotApiMethod<Message>>{

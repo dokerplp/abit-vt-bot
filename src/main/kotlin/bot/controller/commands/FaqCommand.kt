@@ -3,6 +3,7 @@ package bot.controller.commands
 import bot.model.controller.FaqController
 import bot.model.controller.LanguageController
 import bot.utli.ResourceOperator
+import bot.utli.enums.Language
 import bot.utli.getChatId
 import bot.utli.sendMessage
 import org.springframework.beans.factory.annotation.Autowired
@@ -27,8 +28,11 @@ class FaqCommand(
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
         for (faq in faqController.findAll()) {
             val button = InlineKeyboardButton()
-            button.text = faq.question.ru
-            button.callbackData = "link:" + faq.id
+            when ((languageController.getById(getChatId(update)).language)) {
+                Language.EN -> button.text = faq.question.en
+                Language.RU -> button.text = faq.question.ru
+            }
+            button.callbackData = "faq:" + faq.id
             val bl: MutableList<InlineKeyboardButton> = ArrayList()
             bl.add(button)
             buttons.add(bl)

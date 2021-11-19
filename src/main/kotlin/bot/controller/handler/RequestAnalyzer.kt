@@ -35,17 +35,14 @@ class RequestAnalyzer(
             val msg = sendMessage(update)
             msg.text = resourceOperator.getText("analyze.text", getChatId(update))!!
 
-            val language: Language = languageController.getById(getChatId(update)).language
             val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
             for (faq in faqs) {
                 val button = InlineKeyboardButton()
-                if (language == Language.RU) {
-                    button.text = faq.question.ru
-                    button.callbackData = faq.answer.ru
-                } else if (language == Language.EN) {
-                    button.text = faq.question.en
-                    button.callbackData = faq.answer.en
+                when ((languageController.getById(getChatId(update)).language)) {
+                    Language.EN -> button.text = faq.question.en
+                    Language.RU -> button.text = faq.question.ru
                 }
+                button.callbackData = "faq:" + faq.id
                 val bl: MutableList<InlineKeyboardButton> = ArrayList()
                 bl.add(button)
                 buttons.add(bl)
@@ -58,7 +55,7 @@ class RequestAnalyzer(
     }
 
 
-    private fun suggest(text: String): List<FaqEntity>{
+    private fun suggest(text: String): List<FaqEntity> {
 
         val textArr: List<String> = text.split(" ").stream().map { it.lowercase() }.filter { it.length > 3 }.toList()
 
