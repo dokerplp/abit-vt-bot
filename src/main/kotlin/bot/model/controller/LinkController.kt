@@ -11,4 +11,5 @@ class LinkController(
     @Autowired val repository: LinkRepository
 ) : LinkService {
     override fun findAll(): MutableIterable<LinkEntity> = repository.findAll()
+    override fun getById(id: Long): LinkEntity? = repository.getById(id)
 }

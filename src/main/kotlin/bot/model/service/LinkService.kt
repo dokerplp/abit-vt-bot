@@ -6,4 +6,5 @@ import org.springframework.stereotype.Service
 @Service
 interface LinkService {
     fun findAll(): MutableIterable<LinkEntity>
+    fun getById(id: Long): LinkEntity?
 }

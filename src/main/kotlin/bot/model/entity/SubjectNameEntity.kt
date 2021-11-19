@@ -15,7 +15,7 @@ class SubjectNameEntity {
     @Column(name = "en")
     lateinit var en: String
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.ALL])
     @MapsId
     @JoinColumn(name = "sub_id")
     lateinit var subject: SubjectEntity

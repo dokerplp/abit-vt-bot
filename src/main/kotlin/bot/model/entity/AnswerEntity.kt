@@ -17,9 +17,15 @@ class AnswerEntity() {
     @Column(name = "en")
     lateinit var en: String
 
-    @OneToOne
+    @OneToOne(cascade= [CascadeType.ALL])
     @MapsId
     @JoinColumn(name = "faq_id")
     lateinit var faq: FaqEntity
+
+    constructor(ru: String, en: String, faq: FaqEntity) : this() {
+        this.ru = ru
+        this.en = en
+        this.faq = faq
+    }
 
 }

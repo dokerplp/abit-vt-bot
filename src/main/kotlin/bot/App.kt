@@ -13,5 +13,6 @@ import org.springframework.scheduling.annotation.EnableScheduling
 class App
 
 fun main(args: Array<String>) {
-    runApplication<App>(*args)
+    val context = runApplication<App>(*args)
+    Thread(context.getBean(AdminPanel::class.java)).start()
 }

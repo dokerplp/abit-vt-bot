@@ -11,20 +11,19 @@ class FaqEntity() {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
-    @OneToOne
+    @OneToOne(cascade= [CascadeType.ALL])
     @PrimaryKeyJoinColumn
     lateinit var question: QuestionEntity
 
-    @OneToOne
+    @OneToOne(cascade= [CascadeType.ALL])
     @PrimaryKeyJoinColumn
     lateinit var answer: AnswerEntity
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade= [CascadeType.ALL])
     @JoinTable(name = "faq_links",
         joinColumns = [JoinColumn(name = "faq_id")],
         inverseJoinColumns = [JoinColumn(name = "link_id")]
     )
     var links: List<LinkEntity>? = null
-
 
 }
