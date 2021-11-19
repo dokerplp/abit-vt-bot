@@ -1,9 +1,9 @@
 package bot.model.service
 
 import bot.model.entity.FaqEntity
-import bot.model.entity.LanguageEntity
+import org.springframework.stereotype.Service
 
-
+@Service
 interface FaqService {
     fun findAll(): MutableIterable<FaqEntity>
     fun save(entity: FaqEntity)

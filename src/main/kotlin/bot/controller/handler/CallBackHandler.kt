@@ -23,6 +23,13 @@ class CallBackHandler(
     @Autowired val subjectController: SubjectController,
     @Autowired val languageController: LanguageController
 ) : Handler {
+
+    /**
+     * Trying to send answer on faq or subject callback data
+     *
+     * @param update
+     * @return - array of SendMessage, SendSticker and so on
+     */
     override fun handle(update: Update): Array<PartialBotApiMethod<Message>>? {
         val text = update.callbackQuery.data
         return if (text.startsWith("faq")) faqCallBack(text, update)
@@ -30,7 +37,14 @@ class CallBackHandler(
         else textHandler.handle(text, update)
     }
 
-    private fun faqCallBack(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
+    /**
+     * Faq callback handler
+     *
+     * @param text - faq: + id
+     * @param update
+     * @return - question answer
+     */
+    private fun faqCallBack(text: String, update: Update): Array<PartialBotApiMethod<Message>> {
 
         val id = text.substring(4).toLong()
         val faq: FaqEntity = faqController.getById(id)
@@ -62,7 +76,14 @@ class CallBackHandler(
         return arrayOf(msg)
     }
 
-    private fun subCallBack(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
+    /**
+     * Subject callback handler
+     *
+     * @param text - sub: + id
+     * @param update
+     * @return - subject description
+     */
+    private fun subCallBack(text: String, update: Update): Array<PartialBotApiMethod<Message>> {
         val id = text.substring(4).toLong()
         val sub: SubjectEntity = subjectController.getById(id)
 

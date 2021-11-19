@@ -1,6 +1,5 @@
 package bot.model.entity
 
-
 import javax.persistence.*
 
 @Entity

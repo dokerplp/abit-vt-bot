@@ -1,7 +1,6 @@
 package bot.controller.commands
 
 import bot.utli.ResourceOperator
-import bot.utli.getChatId
 import bot.utli.sendMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
@@ -14,7 +13,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 @Component("/help")
 class HelpCommand(
-    @Autowired val context: ApplicationContext,
+    @Autowired final val context: ApplicationContext,
     @Autowired val resourceOperator: ResourceOperator
 ) : Command {
 
@@ -24,7 +23,7 @@ class HelpCommand(
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
 
         val sendMessage = sendMessage(update)
-        sendMessage.text = resourceOperator.getText("help.text", getChatId(update))!!
+        sendMessage.text = resourceOperator.getText("help.text", update)
 
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
 
@@ -46,7 +45,7 @@ class HelpCommand(
 
 
     override fun help(update: Update): String {
-        return resourceOperator.getHelp("help", getChatId(update))!!
+        return resourceOperator.getHelp("help", update)
     }
 
     override fun name(): String {

@@ -24,16 +24,22 @@ class RequestAnalyzer(
     @Autowired val faqController: FaqController,
     @Autowired val resourceOperator: ResourceOperator,
     @Autowired val languageController: LanguageController
-    ) {
+) {
 
+    /**
+     * Trying to analyze message and suggest questions
+     *
+     * @param text - user message
+     * @param update
+     * @return - questions or invoke default in TextHandler
+     */
     fun analyze(text: String, update: Update): Array<PartialBotApiMethod<Message>>? {
 
         val faqs = suggest(text)
         if (faqs.isEmpty()) return null
-
         else {
             val msg = sendMessage(update)
-            msg.text = resourceOperator.getText("analyze.text", getChatId(update))!!
+            msg.text = resourceOperator.getText("analyze.text", update)
 
             val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
             for (faq in faqs) {
@@ -54,7 +60,16 @@ class RequestAnalyzer(
         }
     }
 
-
+    /**
+     * Searching correct questions
+     *
+     * Algorithm:
+     * If question and message have 3 identical words, question will be suggested
+     * Word must have at least 3 chars
+     *
+     * @param text - user message
+     * @return - suggested questions
+     */
     private fun suggest(text: String): List<FaqEntity> {
 
         val textArr: List<String> = text.split(" ").stream().map { it.lowercase() }.filter { it.length > 3 }.toList()

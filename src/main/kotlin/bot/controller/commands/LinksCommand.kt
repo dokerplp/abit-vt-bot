@@ -2,7 +2,6 @@ package bot.controller.commands
 
 import bot.model.controller.LinkController
 import bot.utli.ResourceOperator
-import bot.utli.getChatId
 import bot.utli.sendMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -18,10 +17,9 @@ class LinksCommand(
     @Autowired val linkController: LinkController
 ) : Command {
 
-
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
         val msg = sendMessage(update)
-        msg.text = resourceOperator.getText("links.text", getChatId(update))!!
+        msg.text = resourceOperator.getText("links.text", update)
 
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
         for (link in linkController.findAll()) {
@@ -40,7 +38,7 @@ class LinksCommand(
 
 
     override fun help(update: Update): String {
-        return resourceOperator.getHelp("links", getChatId(update))!!
+        return resourceOperator.getHelp("links", update)
     }
 
     override fun name(): String {

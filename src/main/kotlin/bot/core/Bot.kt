@@ -2,6 +2,8 @@ package bot.core
 
 import bot.controller.UpdateHandler
 import lombok.extern.slf4j.Slf4j
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -11,6 +13,7 @@ import org.telegram.telegrambots.meta.api.methods.send.*
 import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException
+import javax.annotation.PostConstruct
 
 
 @Slf4j
@@ -19,12 +22,14 @@ class Bot(
     @Autowired val handler: UpdateHandler
 ) : TelegramLongPollingBot() {
 
+    private val logger: Logger = LoggerFactory.getLogger(Bot::class.java)
+
     @Value("\${bot.name}")
-    private val botName: String = ""
+    private lateinit var botName: String
     override fun getBotUsername(): String = botName
 
     @Value("\${bot.token}")
-    private val token: String = ""
+    private lateinit var token: String
     override fun getBotToken(): String = token
 
     override fun onUpdateReceived(update: Update?) {
@@ -45,6 +50,9 @@ class Bot(
                 is SendVoice -> execute(msg)
             }
         } catch (e: TelegramApiException) {
+            logger.error("TelegramApiException", e)
+        } catch (e: Exception) {
+            logger.error("UnknownException", e)
         }
     }
 }

@@ -2,7 +2,6 @@ package bot.model.entity
 
 import javax.persistence.*
 
-
 @Entity
 @Table(name = "answers")
 class AnswerEntity() {

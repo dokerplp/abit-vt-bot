@@ -11,10 +11,10 @@ class LinkEntity() {
     var id: Long = 0
 
     @Column(name = "text")
-    var text: String = ""
+    lateinit var text: String
 
     @Column(name = "value")
-    var value: String = ""
+    lateinit var value: String
 
 
 }

@@ -1,7 +1,5 @@
 package bot.utli.enums
 
-
-
 import java.util.*
 
 

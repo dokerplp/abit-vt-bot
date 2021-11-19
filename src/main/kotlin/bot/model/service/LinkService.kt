@@ -1,8 +1,9 @@
 package bot.model.service
 
-import bot.model.entity.LanguageEntity
 import bot.model.entity.LinkEntity
+import org.springframework.stereotype.Service
 
+@Service
 interface LinkService {
     fun findAll(): MutableIterable<LinkEntity>
 }

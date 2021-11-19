@@ -22,7 +22,6 @@ class UpdateHandler(
                 return invoker.handleVoice(update)
             }
         } else if (update.hasCallbackQuery()) {
-            val text = update.callbackQuery.data
             return invoker.handleCallBack(update)
         }
        return null

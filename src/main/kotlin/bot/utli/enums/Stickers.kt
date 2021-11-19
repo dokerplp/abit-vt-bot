@@ -1,8 +1,5 @@
 package bot.utli.enums
 
-import org.telegram.telegrambots.meta.api.methods.send.SendSticker
-import org.telegram.telegrambots.meta.api.objects.InputFile
-import org.telegram.telegrambots.meta.api.objects.Update
 import java.io.Serializable
 
 enum class Stickers(private val id: String) : Serializable {
@@ -12,12 +9,5 @@ enum class Stickers(private val id: String) : Serializable {
 
     override fun toString(): String {
         return id
-    }
-
-    fun sendSticker(update: Update) {
-        val chatId = update.message.chatId.toString()
-        val sendSticker = SendSticker()
-        sendSticker.chatId = chatId
-        sendSticker.sticker = InputFile().setMedia(toString())
     }
 }

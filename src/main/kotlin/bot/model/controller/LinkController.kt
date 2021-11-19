@@ -10,6 +10,5 @@ import org.springframework.stereotype.Component
 class LinkController(
     @Autowired val repository: LinkRepository
 ) : LinkService {
-
     override fun findAll(): MutableIterable<LinkEntity> = repository.findAll()
 }

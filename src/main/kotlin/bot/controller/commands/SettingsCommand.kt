@@ -1,7 +1,6 @@
 package bot.controller.commands
 
 import bot.utli.ResourceOperator
-import bot.utli.getChatId
 import bot.utli.sendMessage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -19,14 +18,14 @@ class SettingsCommand(
 
     override fun execute(update: Update): Array<PartialBotApiMethod<Message>>? {
         val msg = sendMessage(update)
-        msg.text = resourceOperator.getText("settings.text", getChatId(update))!!
+        msg.text = resourceOperator.getText("settings.text", update)
 
         val keyboardMarkup = ReplyKeyboardMarkup()
         val keyboard: MutableList<KeyboardRow> = ArrayList()
         val row = KeyboardRow()
 
         keyboardMarkup.resizeKeyboard = true
-        row.add(resourceOperator.getText("settings.settings", getChatId(update))!!)
+        row.add(resourceOperator.getText("settings.settings", update))
 
         keyboard.add(row)
         keyboardMarkup.keyboard = keyboard
@@ -37,7 +36,7 @@ class SettingsCommand(
 
 
     override fun help(update: Update): String {
-        return resourceOperator.getHelp("settings", getChatId(update))!!
+        return resourceOperator.getHelp("settings", update)
     }
 
     override fun name(): String {
