@@ -28,7 +28,7 @@ class SubjectsCommand(
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
         for (sub in subjectController.findAll()) {
             val button = InlineKeyboardButton()
-            when ((languageController.getById(getChatId(update)).language)) {
+            when ((languageController.getById(getChatId(update))!!.language)) {
                 Language.EN -> button.text = sub.name.en
                 Language.RU -> button.text = sub.name.ru
             }

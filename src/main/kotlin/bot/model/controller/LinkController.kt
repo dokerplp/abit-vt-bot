@@ -12,4 +12,6 @@ class LinkController(
 ) : LinkService {
     override fun findAll(): MutableIterable<LinkEntity> = repository.findAll()
     override fun getById(id: Long): LinkEntity? = repository.getById(id)
+    override fun save(entity: LinkEntity): LinkEntity = repository.save(entity)
+    override fun deleteAll() = repository.deleteAll()
 }

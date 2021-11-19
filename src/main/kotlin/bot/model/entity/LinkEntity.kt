@@ -16,5 +16,8 @@ class LinkEntity() {
     @Column(name = "value")
     lateinit var value: String
 
-
+    constructor(text: String, value: String) : this() {
+        this.text = text
+        this.value = value
+    }
 }

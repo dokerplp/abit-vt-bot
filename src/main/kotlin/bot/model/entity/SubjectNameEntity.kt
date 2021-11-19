@@ -4,9 +4,10 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "subject_names")
-class SubjectNameEntity {
+class SubjectNameEntity() {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
     @Column(name = "ru")
@@ -20,4 +21,9 @@ class SubjectNameEntity {
     @JoinColumn(name = "sub_id")
     lateinit var subject: SubjectEntity
 
+    constructor(ru: String, en: String, subject: SubjectEntity) : this() {
+        this.ru = ru
+        this.en = en
+        this.subject = subject
+    }
 }

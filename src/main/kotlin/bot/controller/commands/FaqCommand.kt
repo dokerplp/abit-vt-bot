@@ -28,7 +28,7 @@ class FaqCommand(
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
         for (faq in faqController.findAll()) {
             val button = InlineKeyboardButton()
-            when ((languageController.getById(getChatId(update)).language)) {
+            when ((languageController.getById(getChatId(update))!!.language)) {
                 Language.EN -> button.text = faq.question.en
                 Language.RU -> button.text = faq.question.ru
             }

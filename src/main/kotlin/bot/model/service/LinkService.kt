@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service
 interface LinkService {
     fun findAll(): MutableIterable<LinkEntity>
     fun getById(id: Long): LinkEntity?
+    fun save(entity: LinkEntity): LinkEntity
+    fun deleteAll()
 }

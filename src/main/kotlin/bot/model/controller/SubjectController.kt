@@ -11,5 +11,7 @@ class SubjectController(
     @Autowired val repository: SubjectRepository
 ) : SubjectService {
     override fun findAll(): MutableIterable<SubjectEntity> = repository.findAll()
-    override fun getById(id: Long): SubjectEntity = repository.getById(id)
+    override fun getById(id: Long): SubjectEntity? = repository.getById(id)
+    override fun save(sub: SubjectEntity): SubjectEntity = repository.save(sub)
+    override fun deleteAll() = repository.deleteAll()
 }

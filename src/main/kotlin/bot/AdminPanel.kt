@@ -1,11 +1,12 @@
 package bot
 
+import bot.core.Bot
 import bot.model.controller.FaqController
 import bot.model.controller.LinkController
-import bot.model.entity.AnswerEntity
-import bot.model.entity.FaqEntity
-import bot.model.entity.LinkEntity
-import bot.model.entity.QuestionEntity
+import bot.model.controller.SubjectController
+import bot.model.entity.*
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.util.*
@@ -15,7 +16,8 @@ import kotlin.streams.toList
 @Component
 class AdminPanel(
     @Autowired val linkController: LinkController,
-    @Autowired val faqController: FaqController
+    @Autowired val faqController: FaqController,
+    @Autowired val subjectController: SubjectController
 ) : Runnable {
 
     private val scanner = Scanner(System.`in`)
@@ -30,14 +32,6 @@ class AdminPanel(
         }
     }
 
-    private fun longCastable(str: String): Long {
-        return try {
-            str.toLong()
-        } catch (e: NumberFormatException) {
-            -1L
-        }
-    }
-
     private fun faq() {
         println("Question:")
         print("\tRussian: ")
@@ -49,6 +43,56 @@ class AdminPanel(
         val aru = scanner.nextLine()
         print("\tEnglish: ")
         val aen = scanner.nextLine()
+
+        val links = links()
+
+        val faq = faqController.save(FaqEntity())
+        faq.answer = AnswerEntity(en = aen, ru = aru, faq = faq)
+        faq.question = QuestionEntity(en = qen, ru = qru, faq = faq)
+        faq.links = links
+        faqController.save(faq)
+    }
+
+    private fun sub() {
+        println("Name:")
+        print("\tRussian: ")
+        val nru = scanner.nextLine()
+        print("\tEnglish: ")
+        val nen = scanner.nextLine()
+        println("Description:")
+        print("\tRussian: ")
+        val dru = scanner.nextLine()
+        print("\tEnglish: ")
+        val den = scanner.nextLine()
+
+        val links = links()
+
+        val sub = subjectController.save(SubjectEntity())
+        sub.name = SubjectNameEntity(ru = nru, en = nen, subject = sub)
+        sub.description = SubjectDescriptionEntity(ru = dru, en = den, subject = sub)
+        sub.links = links
+        subjectController.save(sub)
+    }
+
+    private fun link() {
+        println("Link:")
+        print("\tText: ")
+        val text = scanner.nextLine()
+        print("\tValue: ")
+        val value = scanner.nextLine()
+
+        linkController.save(LinkEntity(text = text, value = value))
+    }
+
+    private fun longCastable(str: String): Long {
+        return try {
+            str.toLong()
+        } catch (e: NumberFormatException) {
+            -1L
+        }
+    }
+
+    private fun links(): ArrayList<LinkEntity> {
         print("Link ids: ")
         val links: List<Long> = scanner.nextLine().split(" ").stream().map { longCastable(it) }.filter { it != -1L }.toList()
 
@@ -57,19 +101,6 @@ class AdminPanel(
             val li = linkController.getById(link)
             if (li != null) list.add(li)
         }
-
-        val faq = faqController.save(FaqEntity())
-        faq.answer = AnswerEntity(en = aen, ru = aru, faq = faq)
-        faq.question = QuestionEntity(en = qen, ru = qru, faq = faq)
-        faq.links = list
-        faqController.save(faq)
-    }
-
-    private fun sub() {
-
-    }
-
-    private fun link() {
-
+        return list
     }
 }

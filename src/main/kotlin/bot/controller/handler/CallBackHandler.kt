@@ -47,9 +47,9 @@ class CallBackHandler(
     private fun faqCallBack(text: String, update: Update): Array<PartialBotApiMethod<Message>> {
 
         val id = text.substring(4).toLong()
-        val faq: FaqEntity = faqController.getById(id)
+        val faq: FaqEntity = faqController.getById(id)!!
 
-        val response = when (languageController.getById(getChatId(update)).language) {
+        val response = when (languageController.getById(getChatId(update))!!.language) {
             Language.RU -> faq.answer.ru
             Language.EN -> faq.answer.en
         }
@@ -85,9 +85,9 @@ class CallBackHandler(
      */
     private fun subCallBack(text: String, update: Update): Array<PartialBotApiMethod<Message>> {
         val id = text.substring(4).toLong()
-        val sub: SubjectEntity = subjectController.getById(id)
+        val sub: SubjectEntity = subjectController.getById(id)!!
 
-        val response = when (languageController.getById(getChatId(update)).language) {
+        val response = when (languageController.getById(getChatId(update))!!.language) {
             Language.RU -> sub.description.ru
             Language.EN -> sub.description.en
         }

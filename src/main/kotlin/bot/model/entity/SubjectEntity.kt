@@ -7,6 +7,8 @@ import javax.persistence.*
 class SubjectEntity {
 
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
     @OneToOne(cascade= [CascadeType.ALL])
