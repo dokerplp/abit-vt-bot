@@ -6,7 +6,7 @@ This bot created for enrollees of ITMO VT.
 
 Used language: ![](https://img.shields.io/github/languages/top/dokerplp/abit-vt-bot?color=gree&style=flat-square)
 
-Current version: ![](https://img.shields.io/badge/version-0.1.1-brightgreen)
+Current version: ![](https://img.shields.io/badge/version-0.2.19-brightgreen)
 
 Used technologies: ***TelegramAPI***, **Spring Framework**, **Spring Boot**, **Spring JPA**
 
@@ -24,11 +24,11 @@ You can test bot on [this link](https://t.me/abit_vt_bot)
 
 **/help** - list of available commands ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
-**/faq** - get list of common answers ![](https://img.shields.io/badge/progress-NOT%20DONE-red)
+**/faq** - get list of common answers ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
-**/subjects** - get subjects and their description ![](https://img.shields.io/badge/progress-NOT%20DONE-red)
+**/subjects** - get subjects and their description ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
-**/links** - get useful links ![](https://img.shields.io/badge/progress-IN%20PROCESS-yellow)
+**/links** - get useful links ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
 **/plan** - get syllabus of VT ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
