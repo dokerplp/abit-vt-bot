@@ -16,6 +16,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
 import java.util.function.Function
+import java.util.stream.Collectors
 import kotlin.streams.toList
 
 
@@ -72,13 +73,13 @@ class RequestAnalyzer(
      */
     private fun suggest(text: String): List<FaqEntity> {
 
-        val textArr: List<String> = text.split(" ").stream().map { it.lowercase() }.filter { it.length > 3 }.toList()
+        val textArr: List<String> = text.split(" ").stream().map { it.toLowerCase() }.filter { it.length > 3 }.collect(Collectors.toList())
 
         val func: Function<QuestionEntity, Long> = Function {
-            textArr.stream().filter { el -> it.en.lowercase().contains(el.lowercase()) or it.ru.lowercase().contains(el.lowercase()) }.count()
+            textArr.stream().filter { el -> it.en.toLowerCase().contains(el.toLowerCase()) or it.ru.toLowerCase().contains(el.toLowerCase()) }.count()
         }
 
-        return faqController.findAll().toList().stream().filter { func.apply(it.question) > 2 }.toList()
+        return faqController.findAll().toList().stream().filter { func.apply(it.question) > 2 }.collect(Collectors.toList())
 
     }
 }
