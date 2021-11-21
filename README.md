@@ -4,7 +4,7 @@ This bot created for enrollees of ITMO VT.
 
 ## Project Info
 
-Used language: 
+Used language: ![](https://img.shields.io/github/languages/top/dokerplp/abit-vt-bot?color=gree&style=flat-square)
 
 Current version: ![](https://img.shields.io/badge/version-0.2.19-brightgreen)
 
