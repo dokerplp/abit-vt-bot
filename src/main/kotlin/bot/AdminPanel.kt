@@ -23,12 +23,16 @@ class AdminPanel(
     private val scanner = Scanner(System.`in`)
 
     override fun run() {
-        while (true) {
-            when (scanner.nextLine()) {
-                "faq" -> faq()
-                "sub" -> sub()
-                "link" -> link()
+        try {
+            while (true) {
+                when (scanner.nextLine()) {
+                    "faq" -> faq()
+                    "sub" -> sub()
+                    "link" -> link()
+                }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -80,8 +84,10 @@ class AdminPanel(
         val text = scanner.nextLine()
         print("\tValue: ")
         val value = scanner.nextLine()
+        print("\tShow: ")
+        val show = scanner.nextLine()
 
-        linkController.save(LinkEntity(text = text, value = value))
+        linkController.save(LinkEntity(text = text, value = value, show = show.toBoolean()))
     }
 
     private fun longCastable(str: String): Long {

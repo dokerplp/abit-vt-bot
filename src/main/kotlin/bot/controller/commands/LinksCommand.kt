@@ -22,7 +22,7 @@ class LinksCommand(
         msg.text = resourceOperator.getText("links.text", update)
 
         val buttons: MutableList<List<InlineKeyboardButton>> = ArrayList()
-        for (link in linkController.findAll()) {
+        for (link in linkController.findAllByShow(true).sortedBy { it.id }) {
             val button = InlineKeyboardButton()
             button.text = link.text
             button.url = link.value
