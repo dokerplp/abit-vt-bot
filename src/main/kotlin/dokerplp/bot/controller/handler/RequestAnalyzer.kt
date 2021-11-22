@@ -8,6 +8,11 @@ import dokerplp.bot.utli.ResourceOperator
 import dokerplp.bot.utli.enums.Language
 import dokerplp.bot.utli.getChatId
 import dokerplp.bot.utli.sendMessage
+import dokerplp.bot.utli.stringSimilarity
+import org.languagetool.JLanguageTool
+import org.languagetool.language.BritishEnglish
+import org.languagetool.language.Russian
+import org.languagetool.tools.Tools.correctTextFromMatches
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod
@@ -16,7 +21,6 @@ import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
 import java.util.function.Function
-import java.util.stream.Collectors
 import kotlin.streams.toList
 
 
@@ -73,13 +77,34 @@ class RequestAnalyzer(
      */
     private fun suggest(text: String): List<FaqEntity> {
 
-        val textArr: List<String> = text.split(" ").stream().map { it.lowercase() }.filter { it.length > 3 }.toList()
+        val en = JLanguageTool(BritishEnglish())
+        val ru = JLanguageTool(Russian())
 
-        val func: Function<QuestionEntity, Long> = Function {
-            textArr.stream().filter { el -> it.en.lowercase().contains(el.lowercase()) or it.ru.lowercase().contains(el.lowercase()) }.count()
+        val curText = correctText(correctText(text, en), ru).lowercase()
+
+        val func: Function<QuestionEntity, Boolean> = Function {
+            ((stringSimilarity(it.en, curText) > 0.5) or (stringSimilarity(it.ru, curText) > 0.5)) or
+                    ((stringSimilarity(it.en, text) > 0.5) or (stringSimilarity(it.ru, text) > 0.5))
         }
 
-        return faqController.findAll().toList().stream().filter { func.apply(it.question) > 2 }.toList()
+        return faqController.findAll().toList().stream().filter { func.apply(it.question) }.toList()
 
+    }
+
+    /**
+     * Automatically applies suggestions to the text, as suggested
+     * by the rules that match.
+     * Note: if there is more than one suggestion, always the first
+     * one is applied, and others are ignored silently.
+     *
+     * @param contents String to be corrected
+     * @param lt Initialized LanguageTool object
+     * @return Corrected text as String.
+     */
+    private fun correctText(contents: String, lt: JLanguageTool): String {
+        val ruleMatches = lt.check(contents)
+        return if (ruleMatches.isEmpty()) {
+            contents
+        } else correctTextFromMatches(contents, ruleMatches)
     }
 }
