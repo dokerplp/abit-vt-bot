@@ -73,13 +73,13 @@ class RequestAnalyzer(
      */
     private fun suggest(text: String): List<FaqEntity> {
 
-        val textArr: List<String> = text.split(" ").stream().map { it.toLowerCase() }.filter { it.length > 3 }.collect(Collectors.toList())
+        val textArr: List<String> = text.split(" ").stream().map { it.lowercase() }.filter { it.length > 3 }.toList()
 
         val func: Function<QuestionEntity, Long> = Function {
-            textArr.stream().filter { el -> it.en.toLowerCase().contains(el.toLowerCase()) or it.ru.toLowerCase().contains(el.toLowerCase()) }.count()
+            textArr.stream().filter { el -> it.en.lowercase().contains(el.lowercase()) or it.ru.lowercase().contains(el.lowercase()) }.count()
         }
 
-        return faqController.findAll().toList().stream().filter { func.apply(it.question) > 2 }.collect(Collectors.toList())
+        return faqController.findAll().toList().stream().filter { func.apply(it.question) > 2 }.toList()
 
     }
 }

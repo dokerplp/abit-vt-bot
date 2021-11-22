@@ -23,11 +23,11 @@ class Bot(
 
     private val logger: Logger = LoggerFactory.getLogger(Bot::class.java)
 
-    @Value("\${dokerplp.bot.name}")
+    @Value("\${bot.name}")
     private lateinit var botName: String
     override fun getBotUsername(): String = botName
 
-    @Value("\${dokerplp.bot.token}")
+    @Value("\${bot.token}")
     private lateinit var token: String
     override fun getBotToken(): String = token
 
