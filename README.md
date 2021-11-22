@@ -1,4 +1,4 @@
-# abit-vt-dokerplp by [@dokerplp](https://github.com/dokerplp)
+# abit-vt-bot by [@dokerplp](https://github.com/dokerplp)
 
 This bot created for enrollees of ITMO VT.
 
