@@ -1,6 +1,6 @@
 # abit-vt-dokerplp by [@dokerplp](https://github.com/dokerplp)
 
-This dokerplp.dokerplp.bot created for enrollees of ITMO VT.
+This bot created for enrollees of ITMO VT.
 
 ## Project Info
 
@@ -34,10 +34,10 @@ You can test dokerplp.dokerplp.bot on [this link](https://t.me/abit_vt_bot)
 
 **/author** - information about author ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
-**/settings** - change dokerplp.dokerplp.bot settings (now you can change language) ![](https://img.shields.io/badge/progress-DONE-brightgreen)
+**/settings** - change bot settings (now you can change language) ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
-**/start** - dokerplp.dokerplp.bot greeting ![](https://img.shields.io/badge/progress-DONE-brightgreen)
+**/start** - bot greeting ![](https://img.shields.io/badge/progress-DONE-brightgreen)
 
 ### Also 
 
-You can send voice or text message to dokerplp.dokerplp.bot and get answer))
+You can send voice or text message to bot and get answer))
