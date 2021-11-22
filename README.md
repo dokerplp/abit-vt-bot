@@ -18,7 +18,7 @@ Supported languages: ***Ru***, ***En***
 
 ## Bot link
 
-You can test dokerplp.dokerplp.bot on [this link](https://t.me/abit_vt_bot)
+You can test bot on [this link](https://t.me/abit_vt_bot)
 
 ## Bot capabilities
 
