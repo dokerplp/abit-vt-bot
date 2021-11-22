@@ -4,7 +4,7 @@ This dokerplp.dokerplp.bot created for enrollees of ITMO VT.
 
 ## Project Info
 
-Used language: ![](https://img.shields.io/github/languages/top/dokerplp/abit-vt-dokerplp.bot?color=pink)
+Used language: ![](https://img.shields.io/github/languages/top/dokerplp/abit-vt-bot?color=pink)
 
 Current version: ![](https://img.shields.io/badge/version-0.2.19-brightgreen)
 
