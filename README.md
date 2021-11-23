@@ -1,4 +1,4 @@
-# abit-vt-dokerplp by [@dokerplp](https://github.com/dokerplp)
+# abit-vt-bot by [@dokerplp](https://github.com/dokerplp)
 
 This bot created for enrollees of ITMO VT.
 
@@ -18,7 +18,7 @@ Supported languages: ***Ru***, ***En***
 
 ## Bot link
 
-You can test dokerplp.dokerplp.bot on [this link](https://t.me/abit_vt_bot)
+You can test bot on [this link](https://t.me/abit_vt_bot)
 
 ## Bot capabilities
 
@@ -40,4 +40,6 @@ You can test dokerplp.dokerplp.bot on [this link](https://t.me/abit_vt_bot)
 
 ### Also 
 
-You can send voice or text message to bot and get answer))
+You can send message to bot and it will try to find similar questions. It used languagetool library for grammar check and levenshtein distance as similarity characteristic.
+
+Also you can send voice message to bot))
