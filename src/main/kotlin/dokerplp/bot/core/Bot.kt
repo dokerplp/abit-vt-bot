@@ -1,6 +1,10 @@
 package dokerplp.bot.core
 
 import dokerplp.bot.controller.UpdateHandler
+import dokerplp.bot.model.controller.LanguageController
+import dokerplp.bot.model.entity.LanguageEntity
+import dokerplp.bot.utli.enums.Language
+import dokerplp.bot.utli.getChatId
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -18,7 +22,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException
 @Slf4j
 @Component
 class Bot(
-    @Autowired val handler: UpdateHandler
+    @Autowired val handler: UpdateHandler,
+    @Autowired val languageController: LanguageController
 ) : TelegramLongPollingBot() {
 
     private val logger: Logger = LoggerFactory.getLogger(Bot::class.java)
@@ -32,7 +37,8 @@ class Bot(
     override fun getBotToken(): String = token
 
     override fun onUpdateReceived(update: Update?) {
-        handler.newUpdate(update!!)!!.forEach { run(it) }
+        checkUser(update!!)
+        handler.newUpdate(update)!!.forEach { run(it) }
     }
 
     fun run(msg: PartialBotApiMethod<Message>) {
@@ -53,5 +59,10 @@ class Bot(
         } catch (e: Exception) {
             logger.error("UnknownException", e)
         }
+    }
+
+    fun checkUser(update: Update) {
+        languageController.getById(getChatId(update))
+            ?: languageController.save(LanguageEntity(getChatId(update), Language.RU))
     }
 }
